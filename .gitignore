@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+*.p8
+**/.cf_cache.json
+**/.cf_cache.tmp
+.cf_session.json
+data/raw/
+__pycache__/

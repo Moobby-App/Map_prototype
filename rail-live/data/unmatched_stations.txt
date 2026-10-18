@@ -1,0 +1,18 @@
+BBN	BRAMBANAN	outside bbox or no confident name match
+CE	CEPER	outside bbox or no confident name match
+DL	DELANGGU	outside bbox or no confident name match
+GW	GAWOK	outside bbox or no confident name match
+JN	JENAR	outside bbox or no confident name match
+KT	KLATEN	outside bbox or no confident name match
+KTA	KUTOARJO	outside bbox or no confident name match
+LPN	LEMPUYANGAN	outside bbox or no confident name match
+MGW	MAGUWO	outside bbox or no confident name match
+PWS	PURWOSARI	outside bbox or no confident name match
+SWT	SROWOT	outside bbox or no confident name match
+WJ	WOJO	outside bbox or no confident name match
+WT	WATES	outside bbox or no confident name match
+PL	PALUR	outside bbox or no confident name match
+KRA	KARANGANTU	outside bbox or no confident name match
+TOJB	TONJONG BARU	outside bbox or no confident name match
+CLG	CILEGON	outside bbox or no confident name match
+KEN	KRENCENG	outside bbox or no confident name match

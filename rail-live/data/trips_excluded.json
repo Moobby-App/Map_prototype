@@ -1,0 +1,3258 @@
+[
+  {
+    "trip": {
+      "train_id": "311",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 18300
+        },
+        {
+          "station_id": "KEN",
+          "t": 19140
+        },
+        {
+          "station_id": "CLG",
+          "t": 19560
+        },
+        {
+          "station_id": "TOJB",
+          "t": 20220
+        },
+        {
+          "station_id": "KRA",
+          "t": 20760
+        },
+        {
+          "station_id": "WLT",
+          "t": 22440
+        },
+        {
+          "station_id": "CKL",
+          "t": 23160
+        },
+        {
+          "station_id": "CT",
+          "t": 23820
+        },
+        {
+          "station_id": "JBU",
+          "t": 24360
+        },
+        {
+          "station_id": "RK",
+          "t": 24960
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "312",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 27000
+        },
+        {
+          "station_id": "JBU",
+          "t": 27660
+        },
+        {
+          "station_id": "CT",
+          "t": 28140
+        },
+        {
+          "station_id": "CKL",
+          "t": 28800
+        },
+        {
+          "station_id": "WLT",
+          "t": 29520
+        },
+        {
+          "station_id": "KRA",
+          "t": 30900
+        },
+        {
+          "station_id": "TOJB",
+          "t": 31440
+        },
+        {
+          "station_id": "CLG",
+          "t": 32100
+        },
+        {
+          "station_id": "KEN",
+          "t": 32580
+        },
+        {
+          "station_id": "MER",
+          "t": 33300
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "313",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 36300
+        },
+        {
+          "station_id": "KEN",
+          "t": 37140
+        },
+        {
+          "station_id": "CLG",
+          "t": 37620
+        },
+        {
+          "station_id": "TOJB",
+          "t": 38280
+        },
+        {
+          "station_id": "KRA",
+          "t": 38820
+        },
+        {
+          "station_id": "WLT",
+          "t": 40560
+        },
+        {
+          "station_id": "CKL",
+          "t": 41280
+        },
+        {
+          "station_id": "CT",
+          "t": 41940
+        },
+        {
+          "station_id": "JBU",
+          "t": 42420
+        },
+        {
+          "station_id": "RK",
+          "t": 43020
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "314",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 50220
+        },
+        {
+          "station_id": "JBU",
+          "t": 50880
+        },
+        {
+          "station_id": "CT",
+          "t": 51360
+        },
+        {
+          "station_id": "CKL",
+          "t": 52020
+        },
+        {
+          "station_id": "WLT",
+          "t": 52740
+        },
+        {
+          "station_id": "KRA",
+          "t": 54120
+        },
+        {
+          "station_id": "TOJB",
+          "t": 54660
+        },
+        {
+          "station_id": "CLG",
+          "t": 55320
+        },
+        {
+          "station_id": "KEN",
+          "t": 55800
+        },
+        {
+          "station_id": "MER",
+          "t": 56520
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "315",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 60000
+        },
+        {
+          "station_id": "KEN",
+          "t": 60900
+        },
+        {
+          "station_id": "CLG",
+          "t": 61320
+        },
+        {
+          "station_id": "TOJB",
+          "t": 61980
+        },
+        {
+          "station_id": "KRA",
+          "t": 62520
+        },
+        {
+          "station_id": "WLT",
+          "t": 64320
+        },
+        {
+          "station_id": "CKL",
+          "t": 65040
+        },
+        {
+          "station_id": "CT",
+          "t": 65700
+        },
+        {
+          "station_id": "JBU",
+          "t": 66240
+        },
+        {
+          "station_id": "RK",
+          "t": 66840
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "316",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 68700
+        },
+        {
+          "station_id": "JBU",
+          "t": 69360
+        },
+        {
+          "station_id": "CT",
+          "t": 69840
+        },
+        {
+          "station_id": "CKL",
+          "t": 70500
+        },
+        {
+          "station_id": "WLT",
+          "t": 71220
+        },
+        {
+          "station_id": "KRA",
+          "t": 72600
+        },
+        {
+          "station_id": "TOJB",
+          "t": 73140
+        },
+        {
+          "station_id": "CLG",
+          "t": 73800
+        },
+        {
+          "station_id": "KEN",
+          "t": 74280
+        },
+        {
+          "station_id": "MER",
+          "t": 75000
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "317",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 76800
+        },
+        {
+          "station_id": "KEN",
+          "t": 77640
+        },
+        {
+          "station_id": "CLG",
+          "t": 78120
+        },
+        {
+          "station_id": "TOJB",
+          "t": 78780
+        },
+        {
+          "station_id": "KRA",
+          "t": 79320
+        },
+        {
+          "station_id": "WLT",
+          "t": 81060
+        },
+        {
+          "station_id": "CKL",
+          "t": 81780
+        },
+        {
+          "station_id": "CT",
+          "t": 82440
+        },
+        {
+          "station_id": "JBU",
+          "t": 82920
+        },
+        {
+          "station_id": "RK",
+          "t": 83460
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "318",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 19800
+        },
+        {
+          "station_id": "JBU",
+          "t": 20460
+        },
+        {
+          "station_id": "CT",
+          "t": 20940
+        },
+        {
+          "station_id": "CKL",
+          "t": 21600
+        },
+        {
+          "station_id": "WLT",
+          "t": 22320
+        },
+        {
+          "station_id": "KRA",
+          "t": 23700
+        },
+        {
+          "station_id": "TOJB",
+          "t": 24240
+        },
+        {
+          "station_id": "CLG",
+          "t": 24900
+        },
+        {
+          "station_id": "KEN",
+          "t": 25380
+        },
+        {
+          "station_id": "MER",
+          "t": 26100
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "319",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 27900
+        },
+        {
+          "station_id": "KEN",
+          "t": 29040
+        },
+        {
+          "station_id": "CLG",
+          "t": 29460
+        },
+        {
+          "station_id": "TOJB",
+          "t": 30120
+        },
+        {
+          "station_id": "KRA",
+          "t": 30960
+        },
+        {
+          "station_id": "WLT",
+          "t": 32340
+        },
+        {
+          "station_id": "CKL",
+          "t": 33060
+        },
+        {
+          "station_id": "CT",
+          "t": 33720
+        },
+        {
+          "station_id": "JBU",
+          "t": 34200
+        },
+        {
+          "station_id": "RK",
+          "t": 34740
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "320",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 36600
+        },
+        {
+          "station_id": "JBU",
+          "t": 37260
+        },
+        {
+          "station_id": "CT",
+          "t": 37740
+        },
+        {
+          "station_id": "CKL",
+          "t": 38400
+        },
+        {
+          "station_id": "WLT",
+          "t": 39120
+        },
+        {
+          "station_id": "KRA",
+          "t": 40500
+        },
+        {
+          "station_id": "TOJB",
+          "t": 41040
+        },
+        {
+          "station_id": "CLG",
+          "t": 41700
+        },
+        {
+          "station_id": "KEN",
+          "t": 42180
+        },
+        {
+          "station_id": "MER",
+          "t": 42900
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "321",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 45840
+        },
+        {
+          "station_id": "KEN",
+          "t": 46680
+        },
+        {
+          "station_id": "CLG",
+          "t": 47160
+        },
+        {
+          "station_id": "TOJB",
+          "t": 47820
+        },
+        {
+          "station_id": "KRA",
+          "t": 48360
+        },
+        {
+          "station_id": "WLT",
+          "t": 49740
+        },
+        {
+          "station_id": "CKL",
+          "t": 50460
+        },
+        {
+          "station_id": "CT",
+          "t": 51420
+        },
+        {
+          "station_id": "JBU",
+          "t": 51900
+        },
+        {
+          "station_id": "RK",
+          "t": 52500
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "322",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 60300
+        },
+        {
+          "station_id": "JBU",
+          "t": 60960
+        },
+        {
+          "station_id": "CT",
+          "t": 61440
+        },
+        {
+          "station_id": "CKL",
+          "t": 62100
+        },
+        {
+          "station_id": "WLT",
+          "t": 62820
+        },
+        {
+          "station_id": "KRA",
+          "t": 64200
+        },
+        {
+          "station_id": "TOJB",
+          "t": 64740
+        },
+        {
+          "station_id": "CLG",
+          "t": 65400
+        },
+        {
+          "station_id": "KEN",
+          "t": 65880
+        },
+        {
+          "station_id": "MER",
+          "t": 66600
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "323",
+      "name": "COMMUTERLINE MERAK",
+      "route": "MERAK-RANGKASBITUNG",
+      "color": "#16812b",
+      "dest": "RANGKASBITUNG",
+      "stops": [
+        {
+          "station_id": "MER",
+          "t": 68400
+        },
+        {
+          "station_id": "KEN",
+          "t": 69240
+        },
+        {
+          "station_id": "CLG",
+          "t": 69720
+        },
+        {
+          "station_id": "TOJB",
+          "t": 70380
+        },
+        {
+          "station_id": "KRA",
+          "t": 70920
+        },
+        {
+          "station_id": "WLT",
+          "t": 72660
+        },
+        {
+          "station_id": "CKL",
+          "t": 73380
+        },
+        {
+          "station_id": "CT",
+          "t": 74040
+        },
+        {
+          "station_id": "JBU",
+          "t": 74520
+        },
+        {
+          "station_id": "RK",
+          "t": 75060
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "324",
+      "name": "COMMUTERLINE MERAK",
+      "route": "RANGKASBITUNG-MERAK",
+      "color": "#93ca3e",
+      "dest": "MERAK",
+      "stops": [
+        {
+          "station_id": "RK",
+          "t": 76920
+        },
+        {
+          "station_id": "JBU",
+          "t": 77760
+        },
+        {
+          "station_id": "CT",
+          "t": 78240
+        },
+        {
+          "station_id": "CKL",
+          "t": 78900
+        },
+        {
+          "station_id": "WLT",
+          "t": 79620
+        },
+        {
+          "station_id": "KRA",
+          "t": 81000
+        },
+        {
+          "station_id": "TOJB",
+          "t": 81540
+        },
+        {
+          "station_id": "CLG",
+          "t": 82200
+        },
+        {
+          "station_id": "KEN",
+          "t": 82680
+        },
+        {
+          "station_id": "MER",
+          "t": 83400
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "501",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "YOGYAKARTA-KUTOARJO",
+      "color": "#0084D8",
+      "dest": "KUTOARJO",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 24000
+        },
+        {
+          "station_id": "WT",
+          "t": 25620
+        },
+        {
+          "station_id": "WJ",
+          "t": 26400
+        },
+        {
+          "station_id": "JN",
+          "t": 26940
+        },
+        {
+          "station_id": "KTA",
+          "t": 27720
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "502",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "KUTOARJO-YOGYAKARTA",
+      "color": "#0084D8",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "KTA",
+          "t": 32700
+        },
+        {
+          "station_id": "JN",
+          "t": 33540
+        },
+        {
+          "station_id": "WJ",
+          "t": 34080
+        },
+        {
+          "station_id": "WT",
+          "t": 34860
+        },
+        {
+          "station_id": "YK",
+          "t": 36300
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "503",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "YOGYAKARTA-KUTOARJO",
+      "color": "#0084D8",
+      "dest": "KUTOARJO",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 42600
+        },
+        {
+          "station_id": "WT",
+          "t": 44100
+        },
+        {
+          "station_id": "WJ",
+          "t": 44880
+        },
+        {
+          "station_id": "JN",
+          "t": 45420
+        },
+        {
+          "station_id": "KTA",
+          "t": 46140
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "504",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "KUTOARJO-YOGYAKARTA",
+      "color": "#0084D8",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "KTA",
+          "t": 47940
+        },
+        {
+          "station_id": "JN",
+          "t": 48720
+        },
+        {
+          "station_id": "WJ",
+          "t": 49260
+        },
+        {
+          "station_id": "WT",
+          "t": 50040
+        },
+        {
+          "station_id": "YK",
+          "t": 51540
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "505",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "YOGYAKARTA-KUTOARJO",
+      "color": "#0084D8",
+      "dest": "KUTOARJO",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 54900
+        },
+        {
+          "station_id": "WT",
+          "t": 56520
+        },
+        {
+          "station_id": "WJ",
+          "t": 57300
+        },
+        {
+          "station_id": "JN",
+          "t": 57840
+        },
+        {
+          "station_id": "KTA",
+          "t": 58560
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "506",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "KUTOARJO-YOGYAKARTA",
+      "color": "#0084D8",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "KTA",
+          "t": 60600
+        },
+        {
+          "station_id": "JN",
+          "t": 61380
+        },
+        {
+          "station_id": "WJ",
+          "t": 61980
+        },
+        {
+          "station_id": "WT",
+          "t": 62880
+        },
+        {
+          "station_id": "YK",
+          "t": 64320
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "507",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "YOGYAKARTA-KUTOARJO",
+      "color": "#0084D8",
+      "dest": "KUTOARJO",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 65100
+        },
+        {
+          "station_id": "WT",
+          "t": 66540
+        },
+        {
+          "station_id": "WJ",
+          "t": 67320
+        },
+        {
+          "station_id": "JN",
+          "t": 67860
+        },
+        {
+          "station_id": "KTA",
+          "t": 68580
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "508",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "KUTOARJO-YOGYAKARTA",
+      "color": "#0084D8",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "KTA",
+          "t": 18600
+        },
+        {
+          "station_id": "JN",
+          "t": 19380
+        },
+        {
+          "station_id": "WJ",
+          "t": 19920
+        },
+        {
+          "station_id": "WT",
+          "t": 20700
+        },
+        {
+          "station_id": "YK",
+          "t": 22200
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "509",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "YOGYAKARTA-KUTOARJO",
+      "color": "#0084D8",
+      "dest": "KUTOARJO",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 58800
+        },
+        {
+          "station_id": "WT",
+          "t": 60300
+        },
+        {
+          "station_id": "WJ",
+          "t": 61080
+        },
+        {
+          "station_id": "JN",
+          "t": 61620
+        },
+        {
+          "station_id": "KTA",
+          "t": 62400
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "510",
+      "name": "COMMUTER LINE PRAMEKS KUTOARJO",
+      "route": "KUTOARJO-YOGYAKARTA",
+      "color": "#0084D8",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "KTA",
+          "t": 67500
+        },
+        {
+          "station_id": "JN",
+          "t": 68280
+        },
+        {
+          "station_id": "WJ",
+          "t": 68820
+        },
+        {
+          "station_id": "WT",
+          "t": 69600
+        },
+        {
+          "station_id": "YK",
+          "t": 71100
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "521",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 15600
+        },
+        {
+          "station_id": "WT",
+          "t": 17160
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "522",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 19860
+        },
+        {
+          "station_id": "YK",
+          "t": 21300
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "523",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 23400
+        },
+        {
+          "station_id": "WT",
+          "t": 24960
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "524",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 28860
+        },
+        {
+          "station_id": "YK",
+          "t": 30300
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "525",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 30780
+        },
+        {
+          "station_id": "WT",
+          "t": 32340
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "526",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 36480
+        },
+        {
+          "station_id": "YK",
+          "t": 37920
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "527",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 43200
+        },
+        {
+          "station_id": "WT",
+          "t": 44760
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "528",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 49200
+        },
+        {
+          "station_id": "YK",
+          "t": 50640
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "529",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 51180
+        },
+        {
+          "station_id": "WT",
+          "t": 52740
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "530",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 56100
+        },
+        {
+          "station_id": "YK",
+          "t": 57540
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "531",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 58020
+        },
+        {
+          "station_id": "WT",
+          "t": 59580
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "532",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 64140
+        },
+        {
+          "station_id": "YK",
+          "t": 65580
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "533",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 69360
+        },
+        {
+          "station_id": "WT",
+          "t": 70920
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "534",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 76200
+        },
+        {
+          "station_id": "YK",
+          "t": 77640
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "561",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 18600
+        },
+        {
+          "station_id": "WT",
+          "t": 20160
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "562",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 23700
+        },
+        {
+          "station_id": "YK",
+          "t": 25140
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "563",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 32100
+        },
+        {
+          "station_id": "WT",
+          "t": 33660
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "564",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 42600
+        },
+        {
+          "station_id": "YK",
+          "t": 44040
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "565",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 45300
+        },
+        {
+          "station_id": "WT",
+          "t": 46860
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "566",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 54660
+        },
+        {
+          "station_id": "YK",
+          "t": 56100
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "567",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 56940
+        },
+        {
+          "station_id": "WT",
+          "t": 58500
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "568",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 62100
+        },
+        {
+          "station_id": "YK",
+          "t": 63540
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "569",
+      "name": "COMMUTER LINE YIA",
+      "route": "YOGYAKARTA-YOGYAKARTA INT AIRPORT",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA INT AIRPORT",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 66300
+        },
+        {
+          "station_id": "WT",
+          "t": 67860
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "570",
+      "name": "COMMUTER LINE YIA",
+      "route": "YIA-YOGYAKARTA",
+      "color": "#16812B",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "WT",
+          "t": 72060
+        },
+        {
+          "station_id": "YK",
+          "t": 73500
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "701",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 18000
+        },
+        {
+          "station_id": "SK",
+          "t": 18360
+        },
+        {
+          "station_id": "SLO",
+          "t": 18780
+        },
+        {
+          "station_id": "PWS",
+          "t": 19080
+        },
+        {
+          "station_id": "GW",
+          "t": 19560
+        },
+        {
+          "station_id": "DL",
+          "t": 19920
+        },
+        {
+          "station_id": "CE",
+          "t": 20340
+        },
+        {
+          "station_id": "KT",
+          "t": 20880
+        },
+        {
+          "station_id": "SWT",
+          "t": 21300
+        },
+        {
+          "station_id": "BBN",
+          "t": 21660
+        },
+        {
+          "station_id": "MGW",
+          "t": 22200
+        },
+        {
+          "station_id": "LPN",
+          "t": 22740
+        },
+        {
+          "station_id": "YK",
+          "t": 22980
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "702",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 25500
+        },
+        {
+          "station_id": "LPN",
+          "t": 25800
+        },
+        {
+          "station_id": "MGW",
+          "t": 26220
+        },
+        {
+          "station_id": "BBN",
+          "t": 26700
+        },
+        {
+          "station_id": "SWT",
+          "t": 27120
+        },
+        {
+          "station_id": "KT",
+          "t": 27540
+        },
+        {
+          "station_id": "CE",
+          "t": 28080
+        },
+        {
+          "station_id": "DL",
+          "t": 28500
+        },
+        {
+          "station_id": "GW",
+          "t": 28860
+        },
+        {
+          "station_id": "PWS",
+          "t": 29340
+        },
+        {
+          "station_id": "SLO",
+          "t": 29760
+        },
+        {
+          "station_id": "SK",
+          "t": 30180
+        },
+        {
+          "station_id": "PL",
+          "t": 30540
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "703",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 32160
+        },
+        {
+          "station_id": "SK",
+          "t": 32520
+        },
+        {
+          "station_id": "SLO",
+          "t": 32880
+        },
+        {
+          "station_id": "PWS",
+          "t": 33180
+        },
+        {
+          "station_id": "GW",
+          "t": 33600
+        },
+        {
+          "station_id": "DL",
+          "t": 33960
+        },
+        {
+          "station_id": "CE",
+          "t": 35160
+        },
+        {
+          "station_id": "KT",
+          "t": 35700
+        },
+        {
+          "station_id": "SWT",
+          "t": 36120
+        },
+        {
+          "station_id": "BBN",
+          "t": 36480
+        },
+        {
+          "station_id": "MGW",
+          "t": 36960
+        },
+        {
+          "station_id": "LPN",
+          "t": 37380
+        },
+        {
+          "station_id": "YK",
+          "t": 37620
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "704",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 39360
+        },
+        {
+          "station_id": "LPN",
+          "t": 39660
+        },
+        {
+          "station_id": "MGW",
+          "t": 40080
+        },
+        {
+          "station_id": "BBN",
+          "t": 40560
+        },
+        {
+          "station_id": "SWT",
+          "t": 40980
+        },
+        {
+          "station_id": "KT",
+          "t": 41400
+        },
+        {
+          "station_id": "CE",
+          "t": 41940
+        },
+        {
+          "station_id": "DL",
+          "t": 42360
+        },
+        {
+          "station_id": "GW",
+          "t": 42720
+        },
+        {
+          "station_id": "PWS",
+          "t": 43200
+        },
+        {
+          "station_id": "SLO",
+          "t": 43560
+        },
+        {
+          "station_id": "SK",
+          "t": 43920
+        },
+        {
+          "station_id": "PL",
+          "t": 44280
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "705",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 46200
+        },
+        {
+          "station_id": "SK",
+          "t": 46560
+        },
+        {
+          "station_id": "SLO",
+          "t": 46980
+        },
+        {
+          "station_id": "PWS",
+          "t": 47280
+        },
+        {
+          "station_id": "GW",
+          "t": 47760
+        },
+        {
+          "station_id": "DL",
+          "t": 48120
+        },
+        {
+          "station_id": "CE",
+          "t": 48540
+        },
+        {
+          "station_id": "KT",
+          "t": 49080
+        },
+        {
+          "station_id": "SWT",
+          "t": 49500
+        },
+        {
+          "station_id": "BBN",
+          "t": 49920
+        },
+        {
+          "station_id": "MGW",
+          "t": 50400
+        },
+        {
+          "station_id": "LPN",
+          "t": 50880
+        },
+        {
+          "station_id": "YK",
+          "t": 51120
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "706",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 54060
+        },
+        {
+          "station_id": "LPN",
+          "t": 54360
+        },
+        {
+          "station_id": "MGW",
+          "t": 54780
+        },
+        {
+          "station_id": "BBN",
+          "t": 55320
+        },
+        {
+          "station_id": "SWT",
+          "t": 55740
+        },
+        {
+          "station_id": "KT",
+          "t": 56160
+        },
+        {
+          "station_id": "CE",
+          "t": 56700
+        },
+        {
+          "station_id": "DL",
+          "t": 57120
+        },
+        {
+          "station_id": "GW",
+          "t": 57480
+        },
+        {
+          "station_id": "PWS",
+          "t": 57960
+        },
+        {
+          "station_id": "SLO",
+          "t": 58380
+        },
+        {
+          "station_id": "SK",
+          "t": 58740
+        },
+        {
+          "station_id": "PL",
+          "t": 59100
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "707",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 59700
+        },
+        {
+          "station_id": "SK",
+          "t": 60060
+        },
+        {
+          "station_id": "SLO",
+          "t": 60420
+        },
+        {
+          "station_id": "PWS",
+          "t": 60720
+        },
+        {
+          "station_id": "GW",
+          "t": 61140
+        },
+        {
+          "station_id": "DL",
+          "t": 61500
+        },
+        {
+          "station_id": "CE",
+          "t": 61920
+        },
+        {
+          "station_id": "KT",
+          "t": 62460
+        },
+        {
+          "station_id": "SWT",
+          "t": 62880
+        },
+        {
+          "station_id": "BBN",
+          "t": 63240
+        },
+        {
+          "station_id": "MGW",
+          "t": 63720
+        },
+        {
+          "station_id": "LPN",
+          "t": 64140
+        },
+        {
+          "station_id": "YK",
+          "t": 64500
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "708",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 65280
+        },
+        {
+          "station_id": "LPN",
+          "t": 65580
+        },
+        {
+          "station_id": "MGW",
+          "t": 66000
+        },
+        {
+          "station_id": "BBN",
+          "t": 66480
+        },
+        {
+          "station_id": "SWT",
+          "t": 66900
+        },
+        {
+          "station_id": "KT",
+          "t": 67320
+        },
+        {
+          "station_id": "CE",
+          "t": 67860
+        },
+        {
+          "station_id": "DL",
+          "t": 68280
+        },
+        {
+          "station_id": "GW",
+          "t": 68640
+        },
+        {
+          "station_id": "PWS",
+          "t": 69060
+        },
+        {
+          "station_id": "SLO",
+          "t": 69420
+        },
+        {
+          "station_id": "SK",
+          "t": 69780
+        },
+        {
+          "station_id": "PL",
+          "t": 70080
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "709",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 74520
+        },
+        {
+          "station_id": "SK",
+          "t": 74880
+        },
+        {
+          "station_id": "SLO",
+          "t": 75240
+        },
+        {
+          "station_id": "PWS",
+          "t": 75540
+        },
+        {
+          "station_id": "GW",
+          "t": 75960
+        },
+        {
+          "station_id": "DL",
+          "t": 76320
+        },
+        {
+          "station_id": "CE",
+          "t": 76740
+        },
+        {
+          "station_id": "KT",
+          "t": 77280
+        },
+        {
+          "station_id": "SWT",
+          "t": 77700
+        },
+        {
+          "station_id": "BBN",
+          "t": 78060
+        },
+        {
+          "station_id": "MGW",
+          "t": 78540
+        },
+        {
+          "station_id": "LPN",
+          "t": 79020
+        },
+        {
+          "station_id": "YK",
+          "t": 79260
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "710",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 81300
+        },
+        {
+          "station_id": "LPN",
+          "t": 81600
+        },
+        {
+          "station_id": "MGW",
+          "t": 82020
+        },
+        {
+          "station_id": "BBN",
+          "t": 82560
+        },
+        {
+          "station_id": "SWT",
+          "t": 82980
+        },
+        {
+          "station_id": "KT",
+          "t": 83400
+        },
+        {
+          "station_id": "CE",
+          "t": 83940
+        },
+        {
+          "station_id": "DL",
+          "t": 84360
+        },
+        {
+          "station_id": "GW",
+          "t": 84780
+        },
+        {
+          "station_id": "PWS",
+          "t": 85260
+        },
+        {
+          "station_id": "SLO",
+          "t": 85620
+        },
+        {
+          "station_id": "SK",
+          "t": 86040
+        },
+        {
+          "station_id": "PL",
+          "t": 86400
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "711",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 21900
+        },
+        {
+          "station_id": "SK",
+          "t": 22260
+        },
+        {
+          "station_id": "SLO",
+          "t": 22680
+        },
+        {
+          "station_id": "PWS",
+          "t": 22980
+        },
+        {
+          "station_id": "GW",
+          "t": 23460
+        },
+        {
+          "station_id": "DL",
+          "t": 23820
+        },
+        {
+          "station_id": "CE",
+          "t": 24240
+        },
+        {
+          "station_id": "KT",
+          "t": 24780
+        },
+        {
+          "station_id": "SWT",
+          "t": 25200
+        },
+        {
+          "station_id": "BBN",
+          "t": 25560
+        },
+        {
+          "station_id": "MGW",
+          "t": 26100
+        },
+        {
+          "station_id": "LPN",
+          "t": 26700
+        },
+        {
+          "station_id": "YK",
+          "t": 26940
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "712",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 28440
+        },
+        {
+          "station_id": "LPN",
+          "t": 28740
+        },
+        {
+          "station_id": "MGW",
+          "t": 29160
+        },
+        {
+          "station_id": "BBN",
+          "t": 29640
+        },
+        {
+          "station_id": "SWT",
+          "t": 30060
+        },
+        {
+          "station_id": "KT",
+          "t": 30480
+        },
+        {
+          "station_id": "CE",
+          "t": 31020
+        },
+        {
+          "station_id": "DL",
+          "t": 31440
+        },
+        {
+          "station_id": "GW",
+          "t": 31860
+        },
+        {
+          "station_id": "PWS",
+          "t": 32340
+        },
+        {
+          "station_id": "SLO",
+          "t": 32760
+        },
+        {
+          "station_id": "SK",
+          "t": 33120
+        },
+        {
+          "station_id": "PL",
+          "t": 33480
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "714",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 50220
+        },
+        {
+          "station_id": "LPN",
+          "t": 50520
+        },
+        {
+          "station_id": "MGW",
+          "t": 51000
+        },
+        {
+          "station_id": "BBN",
+          "t": 51540
+        },
+        {
+          "station_id": "SWT",
+          "t": 51960
+        },
+        {
+          "station_id": "KT",
+          "t": 52380
+        },
+        {
+          "station_id": "CE",
+          "t": 52920
+        },
+        {
+          "station_id": "DL",
+          "t": 53340
+        },
+        {
+          "station_id": "GW",
+          "t": 53760
+        },
+        {
+          "station_id": "PWS",
+          "t": 54180
+        },
+        {
+          "station_id": "SLO",
+          "t": 54540
+        },
+        {
+          "station_id": "SK",
+          "t": 54900
+        },
+        {
+          "station_id": "PL",
+          "t": 55260
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "715",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 56100
+        },
+        {
+          "station_id": "SK",
+          "t": 56460
+        },
+        {
+          "station_id": "SLO",
+          "t": 56880
+        },
+        {
+          "station_id": "PWS",
+          "t": 57180
+        },
+        {
+          "station_id": "GW",
+          "t": 57660
+        },
+        {
+          "station_id": "DL",
+          "t": 58020
+        },
+        {
+          "station_id": "CE",
+          "t": 58440
+        },
+        {
+          "station_id": "KT",
+          "t": 58980
+        },
+        {
+          "station_id": "SWT",
+          "t": 59400
+        },
+        {
+          "station_id": "BBN",
+          "t": 59760
+        },
+        {
+          "station_id": "MGW",
+          "t": 60240
+        },
+        {
+          "station_id": "LPN",
+          "t": 60720
+        },
+        {
+          "station_id": "YK",
+          "t": 60960
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "716",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 63300
+        },
+        {
+          "station_id": "LPN",
+          "t": 63600
+        },
+        {
+          "station_id": "MGW",
+          "t": 64020
+        },
+        {
+          "station_id": "BBN",
+          "t": 64500
+        },
+        {
+          "station_id": "SWT",
+          "t": 64860
+        },
+        {
+          "station_id": "KT",
+          "t": 65280
+        },
+        {
+          "station_id": "CE",
+          "t": 65820
+        },
+        {
+          "station_id": "DL",
+          "t": 66240
+        },
+        {
+          "station_id": "GW",
+          "t": 66600
+        },
+        {
+          "station_id": "PWS",
+          "t": 67080
+        },
+        {
+          "station_id": "SLO",
+          "t": 67500
+        },
+        {
+          "station_id": "SK",
+          "t": 67860
+        },
+        {
+          "station_id": "PL",
+          "t": 68220
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "717",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 71100
+        },
+        {
+          "station_id": "SK",
+          "t": 71460
+        },
+        {
+          "station_id": "SLO",
+          "t": 72060
+        },
+        {
+          "station_id": "PWS",
+          "t": 72360
+        },
+        {
+          "station_id": "GW",
+          "t": 72840
+        },
+        {
+          "station_id": "DL",
+          "t": 73200
+        },
+        {
+          "station_id": "CE",
+          "t": 73620
+        },
+        {
+          "station_id": "KT",
+          "t": 74160
+        },
+        {
+          "station_id": "SWT",
+          "t": 74580
+        },
+        {
+          "station_id": "BBN",
+          "t": 74940
+        },
+        {
+          "station_id": "MGW",
+          "t": 75420
+        },
+        {
+          "station_id": "LPN",
+          "t": 75900
+        },
+        {
+          "station_id": "YK",
+          "t": 76140
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "718A",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 77100
+        },
+        {
+          "station_id": "LPN",
+          "t": 77400
+        },
+        {
+          "station_id": "MGW",
+          "t": 77820
+        },
+        {
+          "station_id": "BBN",
+          "t": 78300
+        },
+        {
+          "station_id": "SWT",
+          "t": 78660
+        },
+        {
+          "station_id": "KT",
+          "t": 79080
+        },
+        {
+          "station_id": "CE",
+          "t": 79620
+        },
+        {
+          "station_id": "DL",
+          "t": 80040
+        },
+        {
+          "station_id": "GW",
+          "t": 80400
+        },
+        {
+          "station_id": "PWS",
+          "t": 80880
+        },
+        {
+          "station_id": "SLO",
+          "t": 81180
+        },
+        {
+          "station_id": "SK",
+          "t": 81480
+        },
+        {
+          "station_id": "PL",
+          "t": 81840
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "720",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 18300
+        },
+        {
+          "station_id": "LPN",
+          "t": 18600
+        },
+        {
+          "station_id": "MGW",
+          "t": 19020
+        },
+        {
+          "station_id": "BBN",
+          "t": 19560
+        },
+        {
+          "station_id": "SWT",
+          "t": 19980
+        },
+        {
+          "station_id": "KT",
+          "t": 20400
+        },
+        {
+          "station_id": "CE",
+          "t": 20940
+        },
+        {
+          "station_id": "DL",
+          "t": 21360
+        },
+        {
+          "station_id": "GW",
+          "t": 21780
+        },
+        {
+          "station_id": "PWS",
+          "t": 22260
+        },
+        {
+          "station_id": "SLO",
+          "t": 22560
+        },
+        {
+          "station_id": "SK",
+          "t": 22860
+        },
+        {
+          "station_id": "PL",
+          "t": 23160
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "721",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 26100
+        },
+        {
+          "station_id": "SK",
+          "t": 26460
+        },
+        {
+          "station_id": "SLO",
+          "t": 26820
+        },
+        {
+          "station_id": "PWS",
+          "t": 27120
+        },
+        {
+          "station_id": "GW",
+          "t": 27600
+        },
+        {
+          "station_id": "DL",
+          "t": 27960
+        },
+        {
+          "station_id": "CE",
+          "t": 28380
+        },
+        {
+          "station_id": "KT",
+          "t": 28920
+        },
+        {
+          "station_id": "SWT",
+          "t": 29340
+        },
+        {
+          "station_id": "BBN",
+          "t": 29700
+        },
+        {
+          "station_id": "MGW",
+          "t": 30240
+        },
+        {
+          "station_id": "LPN",
+          "t": 30900
+        },
+        {
+          "station_id": "YK",
+          "t": 31140
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "722",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 31740
+        },
+        {
+          "station_id": "LPN",
+          "t": 32040
+        },
+        {
+          "station_id": "MGW",
+          "t": 32460
+        },
+        {
+          "station_id": "BBN",
+          "t": 32940
+        },
+        {
+          "station_id": "SWT",
+          "t": 33360
+        },
+        {
+          "station_id": "KT",
+          "t": 33780
+        },
+        {
+          "station_id": "CE",
+          "t": 34320
+        },
+        {
+          "station_id": "DL",
+          "t": 34740
+        },
+        {
+          "station_id": "GW",
+          "t": 35100
+        },
+        {
+          "station_id": "PWS",
+          "t": 35520
+        },
+        {
+          "station_id": "SLO",
+          "t": 36000
+        },
+        {
+          "station_id": "SK",
+          "t": 36360
+        },
+        {
+          "station_id": "PL",
+          "t": 36720
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "723",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 38400
+        },
+        {
+          "station_id": "SK",
+          "t": 38760
+        },
+        {
+          "station_id": "SLO",
+          "t": 39120
+        },
+        {
+          "station_id": "PWS",
+          "t": 39420
+        },
+        {
+          "station_id": "GW",
+          "t": 39840
+        },
+        {
+          "station_id": "DL",
+          "t": 40200
+        },
+        {
+          "station_id": "CE",
+          "t": 40620
+        },
+        {
+          "station_id": "KT",
+          "t": 41160
+        },
+        {
+          "station_id": "SWT",
+          "t": 41580
+        },
+        {
+          "station_id": "BBN",
+          "t": 41940
+        },
+        {
+          "station_id": "MGW",
+          "t": 42420
+        },
+        {
+          "station_id": "LPN",
+          "t": 42900
+        },
+        {
+          "station_id": "YK",
+          "t": 43140
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "724",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 43620
+        },
+        {
+          "station_id": "LPN",
+          "t": 43920
+        },
+        {
+          "station_id": "MGW",
+          "t": 44340
+        },
+        {
+          "station_id": "BBN",
+          "t": 44820
+        },
+        {
+          "station_id": "SWT",
+          "t": 45240
+        },
+        {
+          "station_id": "KT",
+          "t": 45660
+        },
+        {
+          "station_id": "CE",
+          "t": 46200
+        },
+        {
+          "station_id": "DL",
+          "t": 46620
+        },
+        {
+          "station_id": "GW",
+          "t": 46980
+        },
+        {
+          "station_id": "PWS",
+          "t": 47400
+        },
+        {
+          "station_id": "SLO",
+          "t": 47820
+        },
+        {
+          "station_id": "SK",
+          "t": 48240
+        },
+        {
+          "station_id": "PL",
+          "t": 48600
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "725",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 49380
+        },
+        {
+          "station_id": "SK",
+          "t": 49740
+        },
+        {
+          "station_id": "SLO",
+          "t": 50100
+        },
+        {
+          "station_id": "PWS",
+          "t": 50400
+        },
+        {
+          "station_id": "GW",
+          "t": 50820
+        },
+        {
+          "station_id": "DL",
+          "t": 51180
+        },
+        {
+          "station_id": "CE",
+          "t": 51600
+        },
+        {
+          "station_id": "KT",
+          "t": 52140
+        },
+        {
+          "station_id": "SWT",
+          "t": 52560
+        },
+        {
+          "station_id": "BBN",
+          "t": 52920
+        },
+        {
+          "station_id": "MGW",
+          "t": 53400
+        },
+        {
+          "station_id": "LPN",
+          "t": 54060
+        },
+        {
+          "station_id": "YK",
+          "t": 54360
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "726",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 58200
+        },
+        {
+          "station_id": "LPN",
+          "t": 58500
+        },
+        {
+          "station_id": "MGW",
+          "t": 58920
+        },
+        {
+          "station_id": "BBN",
+          "t": 59400
+        },
+        {
+          "station_id": "SWT",
+          "t": 59820
+        },
+        {
+          "station_id": "KT",
+          "t": 60240
+        },
+        {
+          "station_id": "CE",
+          "t": 60780
+        },
+        {
+          "station_id": "DL",
+          "t": 61920
+        },
+        {
+          "station_id": "GW",
+          "t": 62280
+        },
+        {
+          "station_id": "PWS",
+          "t": 62760
+        },
+        {
+          "station_id": "SLO",
+          "t": 63300
+        },
+        {
+          "station_id": "SK",
+          "t": 63600
+        },
+        {
+          "station_id": "PL",
+          "t": 63900
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "727",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "PALUR-YOGYAKARTA",
+      "color": "#E30A16",
+      "dest": "YOGYAKARTA",
+      "stops": [
+        {
+          "station_id": "PL",
+          "t": 65100
+        },
+        {
+          "station_id": "SK",
+          "t": 65460
+        },
+        {
+          "station_id": "SLO",
+          "t": 65940
+        },
+        {
+          "station_id": "PWS",
+          "t": 66240
+        },
+        {
+          "station_id": "GW",
+          "t": 66660
+        },
+        {
+          "station_id": "DL",
+          "t": 67020
+        },
+        {
+          "station_id": "CE",
+          "t": 67440
+        },
+        {
+          "station_id": "KT",
+          "t": 67980
+        },
+        {
+          "station_id": "SWT",
+          "t": 68400
+        },
+        {
+          "station_id": "BBN",
+          "t": 68760
+        },
+        {
+          "station_id": "MGW",
+          "t": 69240
+        },
+        {
+          "station_id": "LPN",
+          "t": 69660
+        },
+        {
+          "station_id": "YK",
+          "t": 69900
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "728",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 72900
+        },
+        {
+          "station_id": "LPN",
+          "t": 73200
+        },
+        {
+          "station_id": "MGW",
+          "t": 73620
+        },
+        {
+          "station_id": "BBN",
+          "t": 74160
+        },
+        {
+          "station_id": "SWT",
+          "t": 74580
+        },
+        {
+          "station_id": "KT",
+          "t": 75000
+        },
+        {
+          "station_id": "CE",
+          "t": 75540
+        },
+        {
+          "station_id": "DL",
+          "t": 75960
+        },
+        {
+          "station_id": "GW",
+          "t": 76320
+        },
+        {
+          "station_id": "PWS",
+          "t": 76740
+        },
+        {
+          "station_id": "SLO",
+          "t": 77280
+        },
+        {
+          "station_id": "SK",
+          "t": 77640
+        },
+        {
+          "station_id": "PL",
+          "t": 78000
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  },
+  {
+    "trip": {
+      "train_id": "730F",
+      "name": "COMMUTER LINE YOGYAKARTA",
+      "route": "YOGYAKARTA-PALUR",
+      "color": "#E30A16",
+      "dest": "PALUR",
+      "stops": [
+        {
+          "station_id": "YK",
+          "t": 21600
+        },
+        {
+          "station_id": "LPN",
+          "t": 21960
+        },
+        {
+          "station_id": "MGW",
+          "t": 22380
+        },
+        {
+          "station_id": "BBN",
+          "t": 22860
+        },
+        {
+          "station_id": "SWT",
+          "t": 23280
+        },
+        {
+          "station_id": "KT",
+          "t": 23700
+        },
+        {
+          "station_id": "CE",
+          "t": 24240
+        },
+        {
+          "station_id": "DL",
+          "t": 24660
+        },
+        {
+          "station_id": "GW",
+          "t": 25020
+        },
+        {
+          "station_id": "PWS",
+          "t": 25440
+        },
+        {
+          "station_id": "SLO",
+          "t": 25800
+        },
+        {
+          "station_id": "SK",
+          "t": 26100
+        },
+        {
+          "station_id": "PL",
+          "t": 26400
+        }
+      ]
+    },
+    "reason": "outside Jabodetabek"
+  }
+]

@@ -1,0 +1,4 @@
+-r rail-live/requirements.txt
+curl_cffi>=0.15,<1
+nodriver>=0.50,<1
+rapidfuzz>=3,<4

@@ -12,6 +12,7 @@ from fastapi.staticfiles import StaticFiles
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
+OUTPUT = ROOT / "output"
 # Prefer the project configuration; support launching from the workspace root.
 ENV_FILE = ROOT / ".env" if (ROOT / ".env").exists() else ROOT.parent / ".env"
 load_dotenv(ENV_FILE)
@@ -35,6 +36,18 @@ def railway_data(filename: str):
     path = DATA / filename
     if not path.is_file():
         raise HTTPException(404, "Railway data not generated yet")
+    return FileResponse(path, media_type="application/json", headers={"Cache-Control": "no-store"})
+
+
+@app.get("/output/{filename}")
+def generated_railway_data(filename: str):
+    # Serve only generated map assets; the input bundle and validation internals
+    # are not exposed by this endpoint.
+    if filename not in {"lines.json", "stations.json", "trips.json", "segments.geojson", "meta.json"}:
+        raise HTTPException(404, "Unknown generated railway data file")
+    path = OUTPUT / filename
+    if not path.is_file():
+        raise HTTPException(404, "Railway output not generated yet")
     return FileResponse(path, media_type="application/json", headers={"Cache-Control": "no-store"})
 
 

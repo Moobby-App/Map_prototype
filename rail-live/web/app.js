@@ -2,7 +2,7 @@
 
 const $ = (id) => document.getElementById(id);
 const DEFAULT_TIME = 6 * 3600;
-const MAX_TIME = 27 * 3600;
+const DEFAULT_MAX_TIME = 27 * 3600;
 const FALLBACK_COLORS = ["#26a9a0", "#e48836", "#a46cda"];
 const validColor = (value, fallback) => /^#(?:[\da-f]{3}|[\da-f]{6})$/i.test(String(value)) ? value : fallback;
 const validCoordinate = (lat, lng) => Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
@@ -23,10 +23,13 @@ function setStatus(message, failed = false) {
 }
 
 async function loadData(name) {
-  const response = await fetch(`/data/${name}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
-  if (response.status === 404) return { missing: true };
-  if (!response.ok) throw new Error(`${name}: HTTP ${response.status}`);
-  return { value: await response.json() };
+  for (const base of ["/output", "/data"]) {
+    const response = await fetch(`${base}/${name}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+    if (response.status === 404) continue;
+    if (!response.ok) throw new Error(`${base}/${name}: HTTP ${response.status}`);
+    return { value: await response.json(), source: base };
+  }
+  return { missing: true };
 }
 
 function normalizeStations(raw, warnings = []) {
@@ -41,7 +44,8 @@ function normalizeStations(raw, warnings = []) {
       return;
     }
     const id = String(row.id);
-    stations.set(id, { id, name: row.name, lat: row.lat, lng: row.lng, mode: String(row.mode || "KRL").toUpperCase() });
+    const modes = Array.isArray(row.modes) ? row.modes : [row.mode || "krl"];
+    stations.set(id, { id, name: row.name, lat: row.lat, lng: row.lng, modes: modes.map((mode) => String(mode).toLowerCase()) });
   });
   return stations;
 }
@@ -76,6 +80,8 @@ function normalizeTrips(raw, stationIndex, warnings = []) {
       route: String(row.route || "—"),
       color: validColor(row.color, FALLBACK_COLORS[index % FALLBACK_COLORS.length]),
       dest: String(row.dest || "—"),
+      mode: String(row.mode || "krl").toLowerCase(),
+      day_type: ["daily", "weekday", "sunday"].includes(row.day_type) ? row.day_type : "daily",
       stops,
     });
   });
@@ -94,7 +100,7 @@ function normalizeSegments(raw, stationIndex, warnings = []) {
     const from = stationIndex.get(String(properties.from));
     const to = stationIndex.get(String(properties.to));
     const coordinates = feature?.geometry?.coordinates;
-    if (feature?.geometry?.type !== "LineString" || !from || !to || !Array.isArray(coordinates) || coordinates.length !== 2 ||
+    if (feature?.geometry?.type !== "LineString" || !from || !to || !Array.isArray(coordinates) || coordinates.length < 2 ||
         !coordinates.every((point) => Array.isArray(point) && validCoordinate(point[1], point[0]))) {
       warnings.push(`Segment ${index + 1} is invalid and was skipped.`);
       return;
@@ -103,6 +109,7 @@ function normalizeSegments(raw, stationIndex, warnings = []) {
       from,
       to,
       coordinates,
+      modes: Array.isArray(properties.modes) ? properties.modes.map((mode) => String(mode).toLowerCase()) : ["krl"],
       color: validColor(properties.color, "#4f827c"),
       approximate: properties.approximate === true,
     });
@@ -112,11 +119,11 @@ function normalizeSegments(raw, stationIndex, warnings = []) {
 
 function demoData() {
   const stations = [
-    { id: "demo:kota", name: "Jakarta Kota", lat: -6.1376, lng: 106.8146, mode: "KRL" },
-    { id: "demo:juanda", name: "Juanda", lat: -6.1667, lng: 106.8304, mode: "KRL" },
-    { id: "demo:gondangdia", name: "Gondangdia", lat: -6.1859, lng: 106.8326, mode: "KRL" },
-    { id: "demo:cikini", name: "Cikini", lat: -6.1989, lng: 106.8413, mode: "KRL" },
-    { id: "demo:manggarai", name: "Manggarai", lat: -6.2098, lng: 106.8502, mode: "KRL" },
+    { id: "demo:kota", name: "Jakarta Kota", lat: -6.1376, lng: 106.8146, modes: ["krl"] },
+    { id: "demo:juanda", name: "Juanda", lat: -6.1667, lng: 106.8304, modes: ["krl"] },
+    { id: "demo:gondangdia", name: "Gondangdia", lat: -6.1859, lng: 106.8326, modes: ["krl"] },
+    { id: "demo:cikini", name: "Cikini", lat: -6.1989, lng: 106.8413, modes: ["krl"] },
+    { id: "demo:manggarai", name: "Manggarai", lat: -6.2098, lng: 106.8502, modes: ["krl"] },
   ];
   const start = 6 * 3600;
   const trips = [
@@ -129,6 +136,8 @@ function demoData() {
     route: trip.route,
     color: trip.color,
     dest: trip.dest,
+    mode: "krl",
+    day_type: "daily",
     stops: trip.order.map((station, stopIndex) => ({ station_id: station.id, t: start + index * 180 + stopIndex * 420 })),
   }));
   const features = [];
@@ -189,7 +198,7 @@ function appendDetailLine(list, main, meta = "") {
 
 function updateTrainCallout(trip, state, time) {
   $("details").hidden = false;
-  $("detail-kicker").textContent = "KRL · TRAIN DETAILS";
+  $("detail-kicker").textContent = `${trip.mode.toUpperCase()} · TRAIN DETAILS`;
   $("detail-title").textContent = trip.name;
   $("detail-body").textContent = `Train ${trip.train_id}  ·  ${trip.route}\nDestination: ${trip.dest}`;
   const list = $("detail-list");
@@ -206,7 +215,7 @@ function updateTrainCallout(trip, state, time) {
 
 function updateStationCallout(station, departuresByStation, time) {
   $("details").hidden = false;
-  $("detail-kicker").textContent = `${station.mode} · STATION DETAILS`;
+  $("detail-kicker").textContent = `${station.modes.map((mode) => mode.toUpperCase()).join(" / ")} · STATION DETAILS`;
   $("detail-title").textContent = station.name;
   $("detail-body").textContent = `Station ${station.id} · Next scheduled departures`;
   const departures = (departuresByStation.get(station.id) || []).filter((item) => item.stop.time >= time);
@@ -222,9 +231,11 @@ function updateStationCallout(station, departuresByStation, time) {
 }
 
 async function buildMap(map) {
-  const results = await Promise.all([loadData("stations.json"), loadData("trips.json"), loadData("segments.geojson")]);
+  const results = await Promise.all([
+    loadData("stations.json"), loadData("trips.json"), loadData("segments.geojson"), loadData("meta.json"),
+  ]);
   const names = ["stations.json", "trips.json", "segments.geojson"];
-  const missing = results.flatMap((result, index) => result.missing ? [names[index]] : []);
+  const missing = results.slice(0, 3).flatMap((result, index) => result.missing ? [names[index]] : []);
   if (missing.length) {
     const fixture = demoData();
     results[0].value = fixture.stations;
@@ -232,9 +243,16 @@ async function buildMap(map) {
     results[2].value = fixture.segments;
     $("demo-label").hidden = false;
     $("source").textContent = `Demo schedule · ${missing.join(", ")} missing`;
-  } else {
-    $("source").textContent = "Real KCI schedule data · 88 stations";
   }
+  const metadata = results[3].missing ? {} : results[3].value;
+  if (!missing.length) $("source").textContent = metadata.source || "Railway schedule data";
+  const sourceLink = $("data-source-link");
+  sourceLink.textContent = metadata.source || "Unknown source";
+  const sourceUrl = String(metadata.source_url || "");
+  if (/^https?:\/\//i.test(sourceUrl)) sourceLink.href = sourceUrl;
+  else sourceLink.removeAttribute("href");
+  $("data-built-at").textContent = metadata.built_at || "unknown";
+  $("data-source-attribution").textContent = metadata.attribution || "";
 
   const warnings = [];
   const stationIndex = normalizeStations(results[0].value, warnings);
@@ -249,46 +267,94 @@ async function buildMap(map) {
     tripsSkippedInvalid: tripResult.invalidSkips,
     segments: segments.length,
     demo: missing.length > 0,
+    dataFiles: results.slice(0, 3).map((result) => result.source || "demo"),
+    metadata: metadata.built_at || null,
   });
 
-  const departuresByStation = new Map();
-  for (const station of stationIndex.values()) departuresByStation.set(station.id, []);
-  for (const trip of trips) {
-    trip.stops.forEach((stop, index) => {
-      departuresByStation.get(stop.id)?.push({ trip, stop, next: trip.stops[index + 1] });
-    });
-  }
-  for (const departures of departuresByStation.values()) {
-    departures.sort((a, b) => a.stop.time - b.stop.time || a.trip.train_id.localeCompare(b.trip.train_id));
-  }
-
-  for (const station of stationIndex.values()) {
-    const marker = new mapkit.MarkerAnnotation(new mapkit.Coordinate(station.lat, station.lng), {
-      title: station.name,
-      subtitle: `${station.mode} · ${station.id}`,
-      color: station.mode === "MRT" ? "#557ee8" : station.mode === "LRT" ? "#24a394" : "#e4873b",
-      data: { station },
-    });
-    map.addAnnotation(marker);
-  }
-
-  for (const segment of segments) {
-    const overlay = new mapkit.PolylineOverlay(segment.coordinates.map((point) => coordinate(point)), {
-      style: new mapkit.Style({
-        strokeColor: segment.color,
-        strokeOpacity: 0.82,
-        lineWidth: 3.5,
-        lineCap: "round",
-        lineDash: segment.approximate ? [7, 6] : [],
-      }),
-    });
-    map.addOverlay(overlay);
-  }
-
   const annotations = new Map();
+  let networkAnnotations = [];
+  let networkOverlays = [];
+  let departuresByStation = new Map();
+  let visibleTrips = [];
   let selectedTrip = null;
   let selectedStation = null;
   let now = DEFAULT_TIME;
+  const daySelect = $("day-type");
+  const kaiToggle = $("include-kai");
+  const weekdayName = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "Asia/Jakarta" }).format(new Date());
+  const isSaturday = weekdayName === "Sat";
+  let selectedDay = isSaturday ? null : weekdayName === "Sun" ? "sunday" : "weekday";
+  if (isSaturday) daySelect.insertBefore(new Option("Pilih jadwal…", ""), daySelect.firstChild);
+  daySelect.value = selectedDay || "";
+  const saturdayNote = $("saturday-note");
+  function updateSaturdayNote() {
+    saturdayNote.hidden = !isSaturday;
+    if (!isSaturday) return;
+    if (!selectedDay) saturdayNote.textContent = "Jadwal Sabtu tidak tersedia. Pilih Hari kerja atau Minggu.";
+    else saturdayNote.textContent = `Jadwal Sabtu tidak tersedia. Menampilkan jadwal ${selectedDay === "weekday" ? "Hari kerja" : "Minggu"}.`;
+  }
+  updateSaturdayNote();
+
+  const maxTripTime = trips.reduce((max, trip) => Math.max(max, trip.stops.at(-1)?.time || 0), 0);
+  const maxTime = Math.max(DEFAULT_MAX_TIME, Math.ceil(maxTripTime / 3600) * 3600);
+  const slider = $("time");
+  slider.max = maxTime;
+  $("timeline-end").textContent = formatTime(maxTime);
+
+  function rebuildTripSelection() {
+    const showKai = kaiToggle.checked;
+    visibleTrips = selectedDay ? trips.filter((trip) =>
+      (trip.day_type === "daily" || trip.day_type === selectedDay) && (showKai || trip.mode !== "kai")
+    ) : [];
+    departuresByStation = new Map();
+    for (const station of stationIndex.values()) departuresByStation.set(station.id, []);
+    for (const trip of visibleTrips) {
+      trip.stops.forEach((stop, index) => {
+        departuresByStation.get(stop.id)?.push({ trip, stop, next: trip.stops[index + 1] });
+      });
+    }
+    for (const departures of departuresByStation.values()) {
+      departures.sort((a, b) => a.stop.time - b.stop.time || a.trip.train_id.localeCompare(b.trip.train_id));
+    }
+  }
+
+  function refreshNetwork() {
+    networkAnnotations.forEach((annotation) => map.removeAnnotation(annotation));
+    networkOverlays.forEach((overlay) => map.removeOverlay(overlay));
+    networkAnnotations = [];
+    networkOverlays = [];
+    const enabledModes = new Set(["krl", "mrt", "lrtj", "jbdb", ...(kaiToggle.checked ? ["kai"] : [])]);
+    for (const station of stationIndex.values()) {
+      if (!station.modes.some((mode) => enabledModes.has(mode))) continue;
+      const primaryMode = station.modes.find((mode) => enabledModes.has(mode)) || "krl";
+      const colors = { mrt: "#557ee8", lrtj: "#f16227", jbdb: "#24a394", kai: "#6a2c91", krl: "#e4873b" };
+      const marker = new mapkit.MarkerAnnotation(new mapkit.Coordinate(station.lat, station.lng), {
+        title: station.name,
+        subtitle: `${station.modes.map((mode) => mode.toUpperCase()).join(" / ")} · ${station.id}`,
+        color: colors[primaryMode] || colors.krl,
+        data: { station },
+      });
+      map.addAnnotation(marker);
+      networkAnnotations.push(marker);
+    }
+    for (const segment of segments) {
+      if (!segment.modes.some((mode) => enabledModes.has(mode))) continue;
+      const overlay = new mapkit.PolylineOverlay(segment.coordinates.map((point) => coordinate(point)), {
+        style: new mapkit.Style({
+          strokeColor: segment.color,
+          strokeOpacity: 0.82,
+          lineWidth: 3.5,
+          lineCap: "round",
+          lineDash: segment.approximate ? [7, 6] : [],
+        }),
+      });
+      map.addOverlay(overlay);
+      networkOverlays.push(overlay);
+    }
+  }
+  rebuildTripSelection();
+  refreshNetwork();
+
   map.addEventListener("select", (event) => {
     const data = event.annotation?.data;
     if (data?.station) {
@@ -309,7 +375,6 @@ async function buildMap(map) {
 
   let speed = 60;
   let playing = false;
-  const slider = $("time");
   const playButton = $("play");
   const speedButtons = [...document.querySelectorAll("[data-speed]")];
   slider.disabled = false;
@@ -318,7 +383,7 @@ async function buildMap(map) {
   slider.value = now;
 
   playButton.addEventListener("click", () => {
-    if (now >= MAX_TIME) now = 0;
+    if (now >= maxTime) now = 0;
     playing = !playing;
     playButton.querySelector("span:last-child").textContent = playing ? "Pause" : "Play";
     playButton.querySelector(".play-icon").textContent = playing ? "Ⅱ" : "▶";
@@ -332,10 +397,32 @@ async function buildMap(map) {
     now = Number(slider.value);
     render();
   });
+  daySelect.addEventListener("change", () => {
+    selectedDay = daySelect.value || null;
+    updateSaturdayNote();
+    selectedTrip = null;
+    $("details").hidden = true;
+    rebuildTripSelection();
+    render();
+  });
+  kaiToggle.addEventListener("change", () => {
+    selectedTrip = null;
+    $("details").hidden = true;
+    rebuildTripSelection();
+    refreshNetwork();
+    render();
+  });
 
   function activeTrains() {
     const active = [];
-    for (const trip of trips) {
+    const visibleKeys = new Set(visibleTrips.map((trip) => trip.key));
+    for (const [key, entry] of annotations) {
+      if (!visibleKeys.has(key)) {
+        map.removeAnnotation(entry.annotation);
+        annotations.delete(key);
+      }
+    }
+    for (const trip of visibleTrips) {
       const position = positionAt(trip, now);
       let entry = annotations.get(trip.key);
       if (!position) {
@@ -392,7 +479,7 @@ async function buildMap(map) {
     slider.value = now;
     slider.setAttribute("aria-valuetext", formatTime(now));
     $("active-count").textContent = `${active} active`;
-    $("counts").textContent = `${stationIndex.size} stations · ${segments.length} segments · ${active} trains active`;
+    $("counts").textContent = `${networkAnnotations.length} stations · ${networkOverlays.length} track segments · ${active} trains active`;
   }
 
   let previousFrame;
@@ -401,8 +488,8 @@ async function buildMap(map) {
     const elapsed = previousFrame === undefined ? 0 : (timestamp - previousFrame) / 1000;
     previousFrame = timestamp;
     if (playing && !document.hidden) {
-      now = Math.min(MAX_TIME, now + elapsed * speed);
-      if (now >= MAX_TIME) {
+      now = Math.min(maxTime, now + elapsed * speed);
+      if (now >= maxTime) {
         playing = false;
         playButton.querySelector("span:last-child").textContent = "Play";
         playButton.querySelector(".play-icon").textContent = "▶";

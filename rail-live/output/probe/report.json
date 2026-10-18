@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-18T19:29:23.648756+07:00",
+  "created_at": "2026-10-18T20:35:36.653926+07:00",
   "metadata": {
     "started_at": "2026-10-18T19:22:49.136110+07:00",
     "station_ids": [
@@ -11,7 +11,7 @@
     ],
     "duration_minutes_requested": 60,
     "interval_minutes": 2,
-    "snapshot_cycles": 4,
+    "snapshot_cycles": 31,
     "trip_count_all_day_types": 2622,
     "eligible_day_types": [
       "daily",
@@ -20,15 +20,90 @@
     "static_path": "rail-live/output/trips.json",
     "timezone": "Asia/Jakarta",
     "kci_source": "scrapers.krl_client.fetch_schedules (unchanged)",
-    "meta_built_at": "2026-10-12T11:15:13Z"
+    "meta_built_at": "2026-10-12T11:15:13Z",
+    "completed_at": "2026-10-18T20:23:39.726170+07:00",
+    "elapsed_minutes": 60.84,
+    "stopped_early": false
+  },
+  "request_summary": {
+    "expected_requests": 155,
+    "successful_requests": 153,
+    "failed_requests": 2,
+    "errors": [
+      {
+        "captured_at": "2026-10-18T20:11:01.458392+07:00",
+        "station": "DP",
+        "type": "APIError",
+        "message": "[HTTP 522] Endpoint 'schedules' menolak permintaan."
+      },
+      {
+        "captured_at": "2026-10-18T20:19:02.776712+07:00",
+        "station": "THB",
+        "type": "APIError",
+        "message": "[NET] Gagal menghubungi schedules: Timeout"
+      }
+    ]
+  },
+  "response_schema": {
+    "response_envelope_keys": [
+      "data",
+      "status"
+    ],
+    "response_envelope_non_data_values": {
+      "status": [
+        "200"
+      ]
+    },
+    "row_keys": [
+      "color",
+      "dest",
+      "dest_time",
+      "ka_name",
+      "route_name",
+      "time_est",
+      "train_id"
+    ],
+    "row_count": 3141,
+    "field_variation": {
+      "color": {
+        "distinct_values_across_rows": 3,
+        "station_train_pairs_with_snapshot_changes": 0
+      },
+      "dest": {
+        "distinct_values_across_rows": 15,
+        "station_train_pairs_with_snapshot_changes": 0
+      },
+      "dest_time": {
+        "distinct_values_across_rows": 82,
+        "station_train_pairs_with_snapshot_changes": 0
+      },
+      "ka_name": {
+        "distinct_values_across_rows": 3,
+        "station_train_pairs_with_snapshot_changes": 0
+      },
+      "route_name": {
+        "distinct_values_across_rows": 25,
+        "station_train_pairs_with_snapshot_changes": 0
+      },
+      "time_est": {
+        "distinct_values_across_rows": 107,
+        "station_train_pairs_with_snapshot_changes": 0
+      },
+      "train_id": {
+        "distinct_values_across_rows": 104,
+        "station_train_pairs_with_snapshot_changes": 0
+      }
+    },
+    "identity": "Snapshot stability is grouped by station ID and train_id."
   },
   "consecutive_snapshot_diffs": {
     "MRI": {
-      "pairs": 3,
+      "pairs": 30,
       "time_est_changed": 0,
       "dest_time_changed": 0,
-      "appeared": 3,
-      "vanished": 3,
+      "appeared": 23,
+      "vanished": 29,
+      "unavailable_pairs": 0,
       "details": [
         {
           "from": "2026-10-18T19:22:49.168453+07:00",
@@ -55,15 +130,270 @@
           ],
           "time_est_changed": [],
           "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:28:50.441403+07:00",
+          "to": "2026-10-18T19:30:50.769988+07:00",
+          "appeared": [
+            "1433",
+            "5166D"
+          ],
+          "vanished": [
+            "1054",
+            "1413"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:32:51.229699+07:00",
+          "to": "2026-10-18T19:34:51.613390+07:00",
+          "appeared": [
+            "1435"
+          ],
+          "vanished": [
+            "5154C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:34:51.613390+07:00",
+          "to": "2026-10-18T19:36:52.135275+07:00",
+          "appeared": [
+            "1530"
+          ],
+          "vanished": [
+            "1396",
+            "1415"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:36:52.135275+07:00",
+          "to": "2026-10-18T19:38:52.504021+07:00",
+          "appeared": [],
+          "vanished": [
+            "5167C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:38:52.504021+07:00",
+          "to": "2026-10-18T19:40:52.873402+07:00",
+          "appeared": [
+            "5577C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:40:52.873402+07:00",
+          "to": "2026-10-18T19:42:53.207084+07:00",
+          "appeared": [],
+          "vanished": [
+            "5156C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:42:53.207084+07:00",
+          "to": "2026-10-18T19:44:53.567300+07:00",
+          "appeared": [
+            "1418"
+          ],
+          "vanished": [
+            "1398"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:44:53.567300+07:00",
+          "to": "2026-10-18T19:46:57.277145+07:00",
+          "appeared": [
+            "5168D"
+          ],
+          "vanished": [
+            "5569C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:46:57.277145+07:00",
+          "to": "2026-10-18T19:48:57.666395+07:00",
+          "appeared": [],
+          "vanished": [
+            "1419"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:48:57.666395+07:00",
+          "to": "2026-10-18T19:50:58.054411+07:00",
+          "appeared": [
+            "1420",
+            "1437"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:50:58.054411+07:00",
+          "to": "2026-10-18T19:52:58.400228+07:00",
+          "appeared": [],
+          "vanished": [
+            "5169D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:54:58.752826+07:00",
+          "to": "2026-10-18T19:56:59.137797+07:00",
+          "appeared": [
+            "5179C"
+          ],
+          "vanished": [
+            "1402",
+            "5171D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:56:59.137797+07:00",
+          "to": "2026-10-18T19:58:59.478869+07:00",
+          "appeared": [
+            "1422",
+            "1439",
+            "6070C"
+          ],
+          "vanished": [
+            "5158C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:58:59.478869+07:00",
+          "to": "2026-10-18T20:00:59.852455+07:00",
+          "appeared": [],
+          "vanished": [
+            "1404",
+            "1421"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:00:59.852455+07:00",
+          "to": "2026-10-18T20:03:00.172816+07:00",
+          "appeared": [],
+          "vanished": [
+            "1056",
+            "5571C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:03:00.172816+07:00",
+          "to": "2026-10-18T20:05:00.501408+07:00",
+          "appeared": [],
+          "vanished": [
+            "1423"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:05:00.501408+07:00",
+          "to": "2026-10-18T20:07:00.814043+07:00",
+          "appeared": [],
+          "vanished": [
+            "1406",
+            "5173D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:07:00.814043+07:00",
+          "to": "2026-10-18T20:09:01.060843+07:00",
+          "appeared": [
+            "1443",
+            "5181C"
+          ],
+          "vanished": [
+            "1425"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:09:01.060843+07:00",
+          "to": "2026-10-18T20:11:01.458392+07:00",
+          "appeared": [],
+          "vanished": [
+            "1408",
+            "5160C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:13:01.713006+07:00",
+          "to": "2026-10-18T20:15:02.089608+07:00",
+          "appeared": [
+            "5170C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:15:02.089608+07:00",
+          "to": "2026-10-18T20:17:02.431337+07:00",
+          "appeared": [
+            "1428",
+            "5579C"
+          ],
+          "vanished": [
+            "5573C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:19:02.776712+07:00",
+          "to": "2026-10-18T20:21:03.054908+07:00",
+          "appeared": [
+            "1430",
+            "5174C"
+          ],
+          "vanished": [
+            "1410A"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
         }
       ]
     },
     "JNG": {
-      "pairs": 3,
+      "pairs": 30,
       "time_est_changed": 0,
       "dest_time_changed": 0,
-      "appeared": 2,
-      "vanished": 1,
+      "appeared": 16,
+      "vanished": 17,
+      "unavailable_pairs": 0,
       "details": [
         {
           "from": "2026-10-18T19:22:49.168453+07:00",
@@ -86,15 +416,238 @@
           "vanished": [],
           "time_est_changed": [],
           "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:28:50.441403+07:00",
+          "to": "2026-10-18T19:30:50.769988+07:00",
+          "appeared": [],
+          "vanished": [
+            "5564B"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:30:50.769988+07:00",
+          "to": "2026-10-18T19:32:51.229699+07:00",
+          "appeared": [],
+          "vanished": [
+            "5167C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:32:51.229699+07:00",
+          "to": "2026-10-18T19:34:51.613390+07:00",
+          "appeared": [
+            "5570A",
+            "5577C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:34:51.613390+07:00",
+          "to": "2026-10-18T19:36:52.135275+07:00",
+          "appeared": [],
+          "vanished": [
+            "5152C",
+            "5569C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:36:52.135275+07:00",
+          "to": "2026-10-18T19:38:52.504021+07:00",
+          "appeared": [
+            "6073A"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:38:52.504021+07:00",
+          "to": "2026-10-18T19:40:52.873402+07:00",
+          "appeared": [
+            "5166D"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:40:52.873402+07:00",
+          "to": "2026-10-18T19:42:53.207084+07:00",
+          "appeared": [],
+          "vanished": [
+            "5154C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:42:53.207084+07:00",
+          "to": "2026-10-18T19:44:53.567300+07:00",
+          "appeared": [],
+          "vanished": [
+            "5169D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:46:57.277145+07:00",
+          "to": "2026-10-18T19:48:57.666395+07:00",
+          "appeared": [
+            "5179C",
+            "5572A"
+          ],
+          "vanished": [
+            "5156C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:48:57.666395+07:00",
+          "to": "2026-10-18T19:50:58.054411+07:00",
+          "appeared": [],
+          "vanished": [
+            "5171D",
+            "6067B"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:50:58.054411+07:00",
+          "to": "2026-10-18T19:52:58.400228+07:00",
+          "appeared": [
+            "5168D"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:56:59.137797+07:00",
+          "to": "2026-10-18T19:58:59.478869+07:00",
+          "appeared": [],
+          "vanished": [
+            "5566B"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:58:59.478869+07:00",
+          "to": "2026-10-18T20:00:59.852455+07:00",
+          "appeared": [],
+          "vanished": [
+            "5173D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:00:59.852455+07:00",
+          "to": "2026-10-18T20:03:00.172816+07:00",
+          "appeared": [
+            "5181C",
+            "5574A"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:03:00.172816+07:00",
+          "to": "2026-10-18T20:05:00.501408+07:00",
+          "appeared": [
+            "6070C"
+          ],
+          "vanished": [
+            "5158C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:05:00.501408+07:00",
+          "to": "2026-10-18T20:07:00.814043+07:00",
+          "appeared": [],
+          "vanished": [
+            "5573C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:07:00.814043+07:00",
+          "to": "2026-10-18T20:09:01.060843+07:00",
+          "appeared": [],
+          "vanished": [
+            "6069A"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:09:01.060843+07:00",
+          "to": "2026-10-18T20:11:01.458392+07:00",
+          "appeared": [
+            "5579C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:13:01.713006+07:00",
+          "to": "2026-10-18T20:15:02.089608+07:00",
+          "appeared": [
+            "5576A",
+            "6075"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:15:02.089608+07:00",
+          "to": "2026-10-18T20:17:02.431337+07:00",
+          "appeared": [],
+          "vanished": [
+            "5160C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:19:02.776712+07:00",
+          "to": "2026-10-18T20:21:03.054908+07:00",
+          "appeared": [
+            "5170C"
+          ],
+          "vanished": [
+            "5575D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
         }
       ]
     },
     "THB": {
-      "pairs": 3,
+      "pairs": 28,
       "time_est_changed": 0,
       "dest_time_changed": 0,
-      "appeared": 2,
-      "vanished": 1,
+      "appeared": 17,
+      "vanished": 19,
+      "unavailable_pairs": 2,
       "details": [
         {
           "from": "2026-10-18T19:22:49.168453+07:00",
@@ -125,15 +678,238 @@
           ],
           "time_est_changed": [],
           "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:28:50.441403+07:00",
+          "to": "2026-10-18T19:30:50.769988+07:00",
+          "appeared": [
+            "5575D"
+          ],
+          "vanished": [
+            "1776D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:30:50.769988+07:00",
+          "to": "2026-10-18T19:32:51.229699+07:00",
+          "appeared": [],
+          "vanished": [
+            "5165C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:32:51.229699+07:00",
+          "to": "2026-10-18T19:34:51.613390+07:00",
+          "appeared": [],
+          "vanished": [
+            "5738C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:34:51.613390+07:00",
+          "to": "2026-10-18T19:36:52.135275+07:00",
+          "appeared": [
+            "5175C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:36:52.135275+07:00",
+          "to": "2026-10-18T19:38:52.504021+07:00",
+          "appeared": [
+            "5744C"
+          ],
+          "vanished": [
+            "5158C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:38:52.504021+07:00",
+          "to": "2026-10-18T19:40:52.873402+07:00",
+          "appeared": [
+            "1788D"
+          ],
+          "vanished": [
+            "1778D",
+            "5567C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:46:57.277145+07:00",
+          "to": "2026-10-18T19:48:57.666395+07:00",
+          "appeared": [
+            "6070C"
+          ],
+          "vanished": [
+            "5167C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:48:57.666395+07:00",
+          "to": "2026-10-18T19:50:58.054411+07:00",
+          "appeared": [],
+          "vanished": [
+            "5740C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:50:58.054411+07:00",
+          "to": "2026-10-18T19:52:58.400228+07:00",
+          "appeared": [
+            "1792D"
+          ],
+          "vanished": [
+            "1780D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:52:58.400228+07:00",
+          "to": "2026-10-18T19:54:58.752826+07:00",
+          "appeared": [
+            "5577C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:56:59.137797+07:00",
+          "to": "2026-10-18T19:58:59.478869+07:00",
+          "appeared": [],
+          "vanished": [
+            "5160C",
+            "5569C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:58:59.478869+07:00",
+          "to": "2026-10-18T20:00:59.852455+07:00",
+          "appeared": [
+            "5170C"
+          ],
+          "vanished": [
+            "1782D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:00:59.852455+07:00",
+          "to": "2026-10-18T20:03:00.172816+07:00",
+          "appeared": [],
+          "vanished": [
+            "5169D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:03:00.172816+07:00",
+          "to": "2026-10-18T20:05:00.501408+07:00",
+          "appeared": [
+            "1796D"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:05:00.501408+07:00",
+          "to": "2026-10-18T20:07:00.814043+07:00",
+          "appeared": [
+            "5179C"
+          ],
+          "vanished": [
+            "6066C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:07:00.814043+07:00",
+          "to": "2026-10-18T20:09:01.060843+07:00",
+          "appeared": [
+            "5174C"
+          ],
+          "vanished": [
+            "5171D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:09:01.060843+07:00",
+          "to": "2026-10-18T20:11:01.458392+07:00",
+          "appeared": [],
+          "vanished": [
+            "1784D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:11:01.458392+07:00",
+          "to": "2026-10-18T20:13:01.713006+07:00",
+          "appeared": [],
+          "vanished": [
+            "5571C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:13:01.713006+07:00",
+          "to": "2026-10-18T20:15:02.089608+07:00",
+          "appeared": [
+            "1794D",
+            "5746C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:21:03.054908+07:00",
+          "to": "2026-10-18T20:23:03.386487+07:00",
+          "appeared": [
+            "5181C",
+            "6074C"
+          ],
+          "vanished": [
+            "1786D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
         }
       ]
     },
     "DP": {
-      "pairs": 3,
+      "pairs": 28,
       "time_est_changed": 0,
       "dest_time_changed": 0,
-      "appeared": 1,
-      "vanished": 1,
+      "appeared": 13,
+      "vanished": 15,
+      "unavailable_pairs": 2,
       "details": [
         {
           "from": "2026-10-18T19:22:49.168453+07:00",
@@ -154,15 +930,177 @@
           ],
           "time_est_changed": [],
           "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:28:50.441403+07:00",
+          "to": "2026-10-18T19:30:50.769988+07:00",
+          "appeared": [
+            "1056"
+          ],
+          "vanished": [
+            "1050",
+            "1423"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:30:50.769988+07:00",
+          "to": "2026-10-18T19:32:51.229699+07:00",
+          "appeared": [
+            "1443"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:32:51.229699+07:00",
+          "to": "2026-10-18T19:34:51.613390+07:00",
+          "appeared": [
+            "1406"
+          ],
+          "vanished": [
+            "1386",
+            "1425"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:36:52.135275+07:00",
+          "to": "2026-10-18T19:38:52.504021+07:00",
+          "appeared": [
+            "1408"
+          ],
+          "vanished": [
+            "1388"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:42:53.207084+07:00",
+          "to": "2026-10-18T19:44:53.567300+07:00",
+          "appeared": [],
+          "vanished": [
+            "1390"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:46:57.277145+07:00",
+          "to": "2026-10-18T19:48:57.666395+07:00",
+          "appeared": [
+            "1410A"
+          ],
+          "vanished": [
+            "1052"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:50:58.054411+07:00",
+          "to": "2026-10-18T19:52:58.400228+07:00",
+          "appeared": [],
+          "vanished": [
+            "1392"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:52:58.400228+07:00",
+          "to": "2026-10-18T19:54:58.752826+07:00",
+          "appeared": [
+            "1412A"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:54:58.752826+07:00",
+          "to": "2026-10-18T19:56:59.137797+07:00",
+          "appeared": [
+            "1529"
+          ],
+          "vanished": [
+            "1527"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:58:59.478869+07:00",
+          "to": "2026-10-18T20:00:59.852455+07:00",
+          "appeared": [
+            "1414A",
+            "1447"
+          ],
+          "vanished": [
+            "1431"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:00:59.852455+07:00",
+          "to": "2026-10-18T20:03:00.172816+07:00",
+          "appeared": [
+            "1449"
+          ],
+          "vanished": [
+            "1528"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:03:00.172816+07:00",
+          "to": "2026-10-18T20:05:00.501408+07:00",
+          "appeared": [],
+          "vanished": [
+            "1433"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:05:00.501408+07:00",
+          "to": "2026-10-18T20:07:00.814043+07:00",
+          "appeared": [
+            "1416A"
+          ],
+          "vanished": [
+            "1054"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:17:02.431337+07:00",
+          "to": "2026-10-18T20:19:02.776712+07:00",
+          "appeared": [
+            "1418"
+          ],
+          "vanished": [
+            "1398"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
         }
       ]
     },
     "BKS": {
-      "pairs": 3,
+      "pairs": 30,
       "time_est_changed": 0,
       "dest_time_changed": 0,
-      "appeared": 1,
-      "vanished": 1,
+      "appeared": 11,
+      "vanished": 12,
+      "unavailable_pairs": 0,
       "details": [
         {
           "from": "2026-10-18T19:24:49.487000+07:00",
@@ -173,6 +1111,207 @@
           "vanished": [
             "6067B"
           ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:28:50.441403+07:00",
+          "to": "2026-10-18T19:30:50.769988+07:00",
+          "appeared": [],
+          "vanished": [
+            "5171D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:34:51.613390+07:00",
+          "to": "2026-10-18T19:36:52.135275+07:00",
+          "appeared": [],
+          "vanished": [
+            "5173D",
+            "6060C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:36:52.135275+07:00",
+          "to": "2026-10-18T19:38:52.504021+07:00",
+          "appeared": [
+            "5568B"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:40:52.873402+07:00",
+          "to": "2026-10-18T19:42:53.207084+07:00",
+          "appeared": [
+            "5181C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:42:53.207084+07:00",
+          "to": "2026-10-18T19:44:53.567300+07:00",
+          "appeared": [],
+          "vanished": [
+            "5573C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:44:53.567300+07:00",
+          "to": "2026-10-18T19:46:57.277145+07:00",
+          "appeared": [
+            "6066C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:46:57.277145+07:00",
+          "to": "2026-10-18T19:48:57.666395+07:00",
+          "appeared": [
+            "5579C"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:48:57.666395+07:00",
+          "to": "2026-10-18T19:50:58.054411+07:00",
+          "appeared": [],
+          "vanished": [
+            "6069A"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:50:58.054411+07:00",
+          "to": "2026-10-18T19:52:58.400228+07:00",
+          "appeared": [],
+          "vanished": [
+            "5564B"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:52:58.400228+07:00",
+          "to": "2026-10-18T19:54:58.752826+07:00",
+          "appeared": [
+            "6075"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T19:54:58.752826+07:00",
+          "to": "2026-10-18T19:56:59.137797+07:00",
+          "appeared": [],
+          "vanished": [
+            "5575D"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:00:59.852455+07:00",
+          "to": "2026-10-18T20:03:00.172816+07:00",
+          "appeared": [
+            "5166D"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:03:00.172816+07:00",
+          "to": "2026-10-18T20:05:00.501408+07:00",
+          "appeared": [],
+          "vanished": [
+            "5175C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:07:00.814043+07:00",
+          "to": "2026-10-18T20:09:01.060843+07:00",
+          "appeared": [
+            "6077A"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:09:01.060843+07:00",
+          "to": "2026-10-18T20:11:01.458392+07:00",
+          "appeared": [],
+          "vanished": [
+            "5156C"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:11:01.458392+07:00",
+          "to": "2026-10-18T20:13:01.713006+07:00",
+          "appeared": [
+            "5168D"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:13:01.713006+07:00",
+          "to": "2026-10-18T20:15:02.089608+07:00",
+          "appeared": [],
+          "vanished": [
+            "5177A"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:15:02.089608+07:00",
+          "to": "2026-10-18T20:17:02.431337+07:00",
+          "appeared": [
+            "5581D"
+          ],
+          "vanished": [],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:17:02.431337+07:00",
+          "to": "2026-10-18T20:19:02.776712+07:00",
+          "appeared": [],
+          "vanished": [
+            "6071B"
+          ],
+          "time_est_changed": [],
+          "dest_time_changed": []
+        },
+        {
+          "from": "2026-10-18T20:21:03.054908+07:00",
+          "to": "2026-10-18T20:23:03.386487+07:00",
+          "appeared": [
+            "5185D"
+          ],
+          "vanished": [],
           "time_est_changed": [],
           "dest_time_changed": []
         }

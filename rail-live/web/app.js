@@ -1,8 +1,9 @@
 "use strict";
 
 const $ = (id) => document.getElementById(id);
-const DEFAULT_TIME = 6 * 3600;
-const DEFAULT_MAX_TIME = 27 * 3600;
+const ENABLED_SERVICES = ["krl"];
+const LIVE_DELAYS = false;
+const DEBUG_MODE = new URLSearchParams(globalThis.location?.search || "").get("debug") === "1";
 const FALLBACK_COLORS = ["#26a9a0", "#e48836", "#a46cda"];
 const validColor = (value, fallback) => /^#(?:[\da-f]{3}|[\da-f]{6})$/i.test(String(value)) ? value : fallback;
 const validCoordinate = (lat, lng) => Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
@@ -14,6 +15,17 @@ function formatTime(seconds, withSeconds = false) {
   const minute = Math.floor(seconds / 60) % 60;
   const second = seconds % 60;
   return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}${withSeconds ? `:${String(second).padStart(2, "0")}` : ""}`;
+}
+
+function wibClockParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" }).formatToParts(date);
+  return Object.fromEntries(parts.filter((part) => part.type !== "literal").map((part) => [part.type, Number(part.value)]));
+}
+
+function serviceClockSeconds(date = new Date()) {
+  const parts = wibClockParts(date);
+  const seconds = parts.hour * 3600 + parts.minute * 60 + parts.second + date.getMilliseconds() / 1000;
+  return seconds + (parts.hour < 4 ? 86400 : 0);
 }
 
 function setStatus(message, failed = false) {
@@ -44,8 +56,10 @@ function normalizeStations(raw, warnings = []) {
       return;
     }
     const id = String(row.id);
-    const modes = Array.isArray(row.modes) ? row.modes : [row.mode || "krl"];
-    stations.set(id, { id, name: row.name, lat: row.lat, lng: row.lng, modes: modes.map((mode) => String(mode).toLowerCase()) });
+    const modes = (Array.isArray(row.modes) ? row.modes : [row.mode || "krl"])
+      .map((mode) => String(mode).toLowerCase()).filter((mode) => ENABLED_SERVICES.includes(mode));
+    if (!modes.length) return;
+    stations.set(id, { id, name: row.name, lat: row.lat, lng: row.lng, modes });
   });
   return stations;
 }
@@ -58,6 +72,8 @@ function normalizeTrips(raw, stationIndex, warnings = []) {
   const trips = [];
   let missingStationSkips = 0, invalidSkips = 0;
   raw.forEach((row, index) => {
+    const mode = String(row?.mode || "krl").toLowerCase();
+    if (!ENABLED_SERVICES.includes(mode)) return;
     if (!row || row.train_id == null || !Array.isArray(row.stops) || row.stops.length < 2) {
       invalidSkips++;
       return;
@@ -80,7 +96,8 @@ function normalizeTrips(raw, stationIndex, warnings = []) {
       route: String(row.route || "—"),
       color: validColor(row.color, FALLBACK_COLORS[index % FALLBACK_COLORS.length]),
       dest: String(row.dest || "—"),
-      mode: String(row.mode || "krl").toLowerCase(),
+      mode,
+      line_id: Number.isInteger(row.line_id) ? row.line_id : null,
       day_type: ["daily", "weekday", "sunday"].includes(row.day_type) ? row.day_type : "daily",
       stops,
     });
@@ -97,6 +114,9 @@ function normalizeSegments(raw, stationIndex, warnings = []) {
   const segments = [];
   raw.features.forEach((feature, index) => {
     const properties = feature?.properties || {};
+    const modes = (Array.isArray(properties.modes) ? properties.modes : ["krl"])
+      .map((mode) => String(mode).toLowerCase()).filter((mode) => ENABLED_SERVICES.includes(mode));
+    if (!modes.length) return;
     const from = stationIndex.get(String(properties.from));
     const to = stationIndex.get(String(properties.to));
     const coordinates = feature?.geometry?.coordinates;
@@ -109,7 +129,8 @@ function normalizeSegments(raw, stationIndex, warnings = []) {
       from,
       to,
       coordinates,
-      modes: Array.isArray(properties.modes) ? properties.modes.map((mode) => String(mode).toLowerCase()) : ["krl"],
+      modes,
+      lineIds: Array.isArray(properties.line_ids) ? properties.line_ids.map(Number) : [],
       color: validColor(properties.color, "#4f827c"),
       approximate: properties.approximate === true,
     });
@@ -163,24 +184,214 @@ function bearing(a, b) {
   return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
 }
 
-function positionAt(trip, time) {
-  const stops = trip.stops;
-  if (time < stops[0].time || time > stops.at(-1).time) return null;
-  for (let index = 0; index < stops.length - 1; index++) {
-    const a = stops[index], b = stops[index + 1];
-    if (time < b.time) {
-      const duration = b.time - a.time;
-      const progress = duration > 0 ? Math.max(0, Math.min(1, (time - a.time) / duration)) : 0;
-      return {
-        coordinate: [a.lng + (b.lng - a.lng) * progress, a.lat + (b.lat - a.lat) * progress],
-        heading: bearing(a, b),
-        next: b,
-        eta: Math.max(0, b.time - time),
-      };
+const EARTH_RADIUS_M = 6371008.8;
+const toRadians = (degrees) => degrees * Math.PI / 180;
+
+function distanceMeters(a, b) {
+  const lat1 = toRadians(a[1]), lat2 = toRadians(b[1]);
+  const dLat = lat2 - lat1, dLng = toRadians(b[0] - a[0]);
+  const haversine = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return 2 * EARTH_RADIUS_M * Math.asin(Math.min(1, Math.sqrt(haversine)));
+}
+
+function lineDistance(coordinates) {
+  let total = 0;
+  for (let index = 1; index < coordinates.length; index++) total += distanceMeters(coordinates[index - 1], coordinates[index]);
+  return total;
+}
+
+function samePair(a, b) {
+  return a < b ? `${a}\u0000${b}` : `${b}\u0000${a}`;
+}
+
+function buildRailNetwork(segments) {
+  const direct = new Map(), graphs = new Map();
+  for (const segment of segments) {
+    const pairKey = samePair(segment.from.id, segment.to.id);
+    if (!direct.has(pairKey)) direct.set(pairKey, []);
+    const edge = { ...segment, length: lineDistance(segment.coordinates) };
+    direct.get(pairKey).push(edge);
+    if (edge.approximate) continue;
+    for (const mode of edge.modes) for (const lineId of edge.lineIds) {
+      const graphKey = `${mode}:${lineId}`;
+      if (!graphs.has(graphKey)) graphs.set(graphKey, new Map());
+      const graph = graphs.get(graphKey);
+      for (const [from, to] of [[edge.from.id, edge.to.id], [edge.to.id, edge.from.id]]) {
+        if (!graph.has(from)) graph.set(from, []);
+        graph.get(from).push({ to, edge });
+      }
     }
   }
-  const last = stops.at(-1);
-  return { coordinate: [last.lng, last.lat], heading: 0, next: null, eta: 0 };
+  return { direct, graphs, pathCache: new Map() };
+}
+
+function orientedCoordinates(edge, fromId) {
+  return edge.from.id === fromId ? edge.coordinates : [...edge.coordinates].reverse();
+}
+
+function shortestTrackPath(graph, fromId, toId) {
+  if (!graph?.has(fromId) || !graph?.has(toId)) return null;
+  const distances = new Map([[fromId, 0]]), previous = new Map(), pending = new Set([fromId]);
+  while (pending.size) {
+    let current = null, currentDistance = Infinity;
+    for (const node of pending) {
+      const distance = distances.get(node);
+      if (distance < currentDistance) { current = node; currentDistance = distance; }
+    }
+    pending.delete(current);
+    if (current === toId) break;
+    for (const item of graph.get(current) || []) {
+      const candidate = currentDistance + item.edge.length;
+      if (candidate < (distances.get(item.to) ?? Infinity)) {
+        distances.set(item.to, candidate);
+        previous.set(item.to, { from: current, edge: item.edge });
+        pending.add(item.to);
+      }
+    }
+  }
+  if (!previous.has(toId)) return null;
+  const edges = [];
+  for (let cursor = toId; cursor !== fromId;) {
+    const step = previous.get(cursor);
+    if (!step) return null;
+    edges.push({ edge: step.edge, from: step.from });
+    cursor = step.from;
+  }
+  edges.reverse();
+  return edges;
+}
+
+function flattenTrackPieces(pieces) {
+  const coordinates = [];
+  for (const points of pieces) {
+    if (!coordinates.length) coordinates.push(...points);
+    else if (points.length && distanceMeters(coordinates.at(-1), points[0]) < 0.5) coordinates.push(...points.slice(1));
+    else coordinates.push(...points);
+  }
+  return coordinates;
+}
+
+function tripPairGeometry(network, trip, fromId, toId) {
+  const cacheKey = `${trip.mode}:${trip.line_id}:${fromId}>${toId}`;
+  if (network.pathCache.has(cacheKey)) return network.pathCache.get(cacheKey);
+  const direct = (network.direct.get(samePair(fromId, toId)) || []).filter((edge) =>
+    edge.modes.includes(trip.mode) && (trip.line_id == null || edge.lineIds.length === 0 || edge.lineIds.includes(trip.line_id))
+  );
+  const exact = direct.filter((edge) => !edge.approximate).sort((a, b) => a.length - b.length)[0];
+  if (exact) {
+    const pieces = [orientedCoordinates(exact, fromId)];
+    const result = { pieces, coordinates: pieces[0], approximate: false };
+    network.pathCache.set(cacheKey, result);
+    return result;
+  }
+  const connector = direct.find((edge) => edge.approximate);
+  if (connector) {
+    const pieces = [orientedCoordinates(connector, fromId)];
+    const result = { pieces, coordinates: pieces[0], approximate: true };
+    network.pathCache.set(cacheKey, result);
+    return result;
+  }
+  const graph = trip.line_id == null ? null : network.graphs.get(`${trip.mode}:${trip.line_id}`);
+  const path = shortestTrackPath(graph, fromId, toId);
+  const pieces = path ? path.map(({ edge, from }) => orientedCoordinates(edge, from)) : [];
+  const result = { pieces, coordinates: flattenTrackPieces(pieces), approximate: false };
+  network.pathCache.set(cacheKey, result);
+  return result;
+}
+
+function buildTripLegs(trips, segments) {
+  const network = buildRailNetwork(segments);
+  for (const trip of trips) {
+    trip.legs = trip.stops.slice(0, -1).map((a, index) => {
+      const b = trip.stops[index + 1];
+      const gap = b.time - a.time;
+      const terminus = index + 1 === trip.stops.length - 1;
+      const dwell = terminus ? 0 : Math.min(30, Math.max(0, gap - 10));
+      const movingTime = gap - dwell;
+      const geometry = tripPairGeometry(network, trip, a.id, b.id);
+      if (!geometry.cumulative) {
+        geometry.cumulative = [0];
+        geometry.parts = [];
+        for (const piece of geometry.pieces) for (let point = 1; point < piece.length; point++) {
+          const start = geometry.cumulative.at(-1);
+          const end = start + distanceMeters(piece[point - 1], piece[point]);
+          if (end > start) {
+            geometry.parts.push({ a: piece[point - 1], b: piece[point], start, end });
+            geometry.cumulative.push(end);
+          }
+        }
+        geometry.length = geometry.cumulative.at(-1) || 0;
+      }
+      return { a, b, gap, dwell, movingTime, coordinates: geometry.coordinates,
+        parts: geometry.parts, cumulative: geometry.cumulative, length: geometry.length, approximate: geometry.approximate };
+    });
+  }
+  return trips;
+}
+
+function pointAtDistance(leg, distance) {
+  const { parts, cumulative, length } = leg;
+  if (!parts.length) return [leg.b.lng, leg.b.lat];
+  if (distance <= 0 || length <= 0) return parts[0].a;
+  if (distance >= length) return parts.at(-1).b;
+  let low = 0, high = parts.length - 1;
+  while (low < high) {
+    const middle = (low + high) >> 1;
+    if (parts[middle].end < distance) low = middle + 1;
+    else high = middle;
+  }
+  const { a, b, start, end } = parts[low];
+  const progress = end > start ? (distance - start) / (end - start) : 0;
+  return [a[0] + (b[0] - a[0]) * progress, a[1] + (b[1] - a[1]) * progress];
+}
+
+function smoothPolylineHeading(leg, distance) {
+  if (leg.cumulative.length < 2 || leg.length <= 0) return 0;
+  const before = pointAtDistance(leg, Math.max(0, distance - 8));
+  const after = pointAtDistance(leg, Math.min(leg.length, distance + 8));
+  return bearing({ lng: before[0], lat: before[1] }, { lng: after[0], lat: after[1] });
+}
+
+function motionDistance(tau, movingTime, length) {
+  if (movingTime <= 0 || length <= 0) return length;
+  const acceleration = Math.min(22, 0.35 * movingTime);
+  const vmax = length / (movingTime - acceleration);
+  let distance;
+  if (tau < acceleration) distance = vmax * tau ** 2 / (2 * acceleration);
+  else if (tau <= movingTime - acceleration) distance = vmax * acceleration / 2 + vmax * (tau - acceleration);
+  else distance = length - vmax * (movingTime - tau) ** 2 / (2 * acceleration);
+  return Math.max(0, Math.min(length, distance));
+}
+
+function positionAt(trip, time) {
+  const stops = trip.stops, last = stops.at(-1);
+  if (!stops.length || time < stops[0].time || time >= last.time + 60) return null;
+  if (time >= last.time) {
+    const finalLeg = trip.legs?.at(-1);
+    const coordinate = finalLeg?.length > 0
+      ? pointAtDistance(finalLeg, finalLeg.length)
+      : [last.lng, last.lat];
+    return { coordinate, heading: 0, next: null, eta: 0,
+      status: `berhenti di ${last.name}`, stoppedAt: last, approximate: finalLeg?.approximate === true };
+  }
+  for (const leg of trip.legs || []) {
+    const { a, b, movingTime, length } = leg;
+    if (time >= b.time) continue;
+    const eta = Math.max(0, b.time - time);
+    if (movingTime <= 0 || length <= 0) {
+      return { coordinate: [b.lng, b.lat], heading: 0, next: b, eta,
+        status: `berhenti di ${b.name}`, stoppedAt: b, approximate: leg.approximate };
+    }
+    const moveEnd = a.time + movingTime;
+    if (time >= moveEnd) {
+      return { coordinate: pointAtDistance(leg, length), heading: 0, next: b, eta,
+        status: `berhenti di ${b.name}`, stoppedAt: b, approximate: leg.approximate };
+    }
+    const distance = motionDistance(time - a.time, movingTime, length);
+    return { coordinate: pointAtDistance(leg, distance), heading: smoothPolylineHeading(leg, distance),
+      next: b, eta, status: `bergerak ke ${b.name}`, stoppedAt: null, approximate: leg.approximate };
+  }
+  return null;
 }
 
 function appendDetailLine(list, main, meta = "") {
@@ -203,11 +414,12 @@ function updateTrainCallout(trip, state, time) {
   $("detail-body").textContent = `Train ${trip.train_id}  ·  ${trip.route}\nDestination: ${trip.dest}`;
   const list = $("detail-list");
   list.replaceChildren();
+  if (state?.status) appendDetailLine(list, state.status, state.approximate ? "approx. path" : "");
   if (state?.next) {
     const eta = state.eta <= 60 ? `${Math.ceil(state.eta)} sec` : `${Math.ceil(state.eta / 60)} min`;
     appendDetailLine(list, `Next stop · ${state.next.name}`, `ETA ${eta} · ${formatTime(state.next.time)}`);
   } else {
-    appendDetailLine(list, "Service complete", "Final station reached");
+    appendDetailLine(list, "Service complete", `Final station · ${state?.stoppedAt?.name || trip.dest}`);
   }
   $("details").style.setProperty("--callout-color", trip.color);
   $("details").dataset.type = "train";
@@ -232,7 +444,7 @@ function updateStationCallout(station, departuresByStation, time) {
 
 async function buildMap(map) {
   const results = await Promise.all([
-    loadData("stations.json"), loadData("trips.json"), loadData("segments.geojson"), loadData("meta.json"),
+    loadData("stations.json"), loadData("trips.json"), loadData("segments.geojson"),
   ]);
   const names = ["stations.json", "trips.json", "segments.geojson"];
   const missing = results.slice(0, 3).flatMap((result, index) => result.missing ? [names[index]] : []);
@@ -244,21 +456,13 @@ async function buildMap(map) {
     $("demo-label").hidden = false;
     $("source").textContent = `Demo schedule · ${missing.join(", ")} missing`;
   }
-  const metadata = results[3].missing ? {} : results[3].value;
-  if (!missing.length) $("source").textContent = metadata.source || "Railway schedule data";
-  const sourceLink = $("data-source-link");
-  sourceLink.textContent = metadata.source || "Unknown source";
-  const sourceUrl = String(metadata.source_url || "");
-  if (/^https?:\/\//i.test(sourceUrl)) sourceLink.href = sourceUrl;
-  else sourceLink.removeAttribute("href");
-  $("data-built-at").textContent = metadata.built_at || "unknown";
-  $("data-source-attribution").textContent = metadata.attribution || "";
+  if (!missing.length) $("source").textContent = "Jadwal KRL";
 
   const warnings = [];
   const stationIndex = normalizeStations(results[0].value, warnings);
   const tripResult = normalizeTrips(results[1].value, stationIndex, warnings);
   const segments = normalizeSegments(results[2].value, stationIndex, warnings);
-  const trips = tripResult.trips;
+  const trips = buildTripLegs(tripResult.trips, segments);
   $("warnings").textContent = warnings.join(" ");
   console.info("[Jakarta Railway] Data loaded", {
     stations: stationIndex.size,
@@ -268,7 +472,6 @@ async function buildMap(map) {
     segments: segments.length,
     demo: missing.length > 0,
     dataFiles: results.slice(0, 3).map((result) => result.source || "demo"),
-    metadata: metadata.built_at || null,
   });
 
   const annotations = new Map();
@@ -278,11 +481,12 @@ async function buildMap(map) {
   let visibleTrips = [];
   let selectedTrip = null;
   let selectedStation = null;
-  let now = DEFAULT_TIME;
+  let now = serviceClockSeconds();
+  let liveData = null;
+  const liveDelays = new Map();
   const daySelect = $("day-type");
-  const kaiToggle = $("include-kai");
   const weekdayName = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "Asia/Jakarta" }).format(new Date());
-  const isSaturday = weekdayName === "Sat";
+  let isSaturday = weekdayName === "Sat";
   let selectedDay = isSaturday ? null : weekdayName === "Sun" ? "sunday" : "weekday";
   if (isSaturday) daySelect.insertBefore(new Option("Pilih jadwal…", ""), daySelect.firstChild);
   daySelect.value = selectedDay || "";
@@ -295,16 +499,13 @@ async function buildMap(map) {
   }
   updateSaturdayNote();
 
-  const maxTripTime = trips.reduce((max, trip) => Math.max(max, trip.stops.at(-1)?.time || 0), 0);
-  const maxTime = Math.max(DEFAULT_MAX_TIME, Math.ceil(maxTripTime / 3600) * 3600);
-  const slider = $("time");
-  slider.max = maxTime;
-  $("timeline-end").textContent = formatTime(maxTime);
+  const debugPanel = $("debug-panel");
+  debugPanel.hidden = !DEBUG_MODE;
+  let activeDateKey = "";
 
   function rebuildTripSelection() {
-    const showKai = kaiToggle.checked;
     visibleTrips = selectedDay ? trips.filter((trip) =>
-      (trip.day_type === "daily" || trip.day_type === selectedDay) && (showKai || trip.mode !== "kai")
+      ENABLED_SERVICES.includes(trip.mode) && (trip.day_type === "daily" || trip.day_type === selectedDay)
     ) : [];
     departuresByStation = new Map();
     for (const station of stationIndex.values()) departuresByStation.set(station.id, []);
@@ -323,22 +524,19 @@ async function buildMap(map) {
     networkOverlays.forEach((overlay) => map.removeOverlay(overlay));
     networkAnnotations = [];
     networkOverlays = [];
-    const enabledModes = new Set(["krl", "mrt", "lrtj", "jbdb", ...(kaiToggle.checked ? ["kai"] : [])]);
     for (const station of stationIndex.values()) {
-      if (!station.modes.some((mode) => enabledModes.has(mode))) continue;
-      const primaryMode = station.modes.find((mode) => enabledModes.has(mode)) || "krl";
-      const colors = { mrt: "#557ee8", lrtj: "#f16227", jbdb: "#24a394", kai: "#6a2c91", krl: "#e4873b" };
+      if (!station.modes.some((mode) => ENABLED_SERVICES.includes(mode))) continue;
       const marker = new mapkit.MarkerAnnotation(new mapkit.Coordinate(station.lat, station.lng), {
         title: station.name,
-        subtitle: `${station.modes.map((mode) => mode.toUpperCase()).join(" / ")} · ${station.id}`,
-        color: colors[primaryMode] || colors.krl,
+        subtitle: `KRL · ${station.id}`,
+        color: "#e4873b",
         data: { station },
       });
       map.addAnnotation(marker);
       networkAnnotations.push(marker);
     }
     for (const segment of segments) {
-      if (!segment.modes.some((mode) => enabledModes.has(mode))) continue;
+      if (!segment.modes.some((mode) => ENABLED_SERVICES.includes(mode))) continue;
       const overlay = new mapkit.PolylineOverlay(segment.coordinates.map((point) => coordinate(point)), {
         style: new mapkit.Style({
           strokeColor: segment.color,
@@ -373,30 +571,6 @@ async function buildMap(map) {
     $("details").hidden = true;
   });
 
-  let speed = 60;
-  let playing = false;
-  const playButton = $("play");
-  const speedButtons = [...document.querySelectorAll("[data-speed]")];
-  slider.disabled = false;
-  playButton.disabled = false;
-  speedButtons.forEach((button) => { button.disabled = false; });
-  slider.value = now;
-
-  playButton.addEventListener("click", () => {
-    if (now >= maxTime) now = 0;
-    playing = !playing;
-    playButton.querySelector("span:last-child").textContent = playing ? "Pause" : "Play";
-    playButton.querySelector(".play-icon").textContent = playing ? "Ⅱ" : "▶";
-    playButton.setAttribute("aria-label", playing ? "Pause simulation" : "Play simulation");
-  });
-  speedButtons.forEach((button) => button.addEventListener("click", () => {
-    speed = Number(button.dataset.speed);
-    speedButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-  }));
-  slider.addEventListener("input", () => {
-    now = Number(slider.value);
-    render();
-  });
   daySelect.addEventListener("change", () => {
     selectedDay = daySelect.value || null;
     updateSaturdayNote();
@@ -404,15 +578,8 @@ async function buildMap(map) {
     $("details").hidden = true;
     rebuildTripSelection();
     render();
+    refreshLiveStatus();
   });
-  kaiToggle.addEventListener("change", () => {
-    selectedTrip = null;
-    $("details").hidden = true;
-    rebuildTripSelection();
-    refreshNetwork();
-    render();
-  });
-
   function activeTrains() {
     const active = [];
     const visibleKeys = new Set(visibleTrips.map((trip) => trip.key));
@@ -423,7 +590,8 @@ async function buildMap(map) {
       }
     }
     for (const trip of visibleTrips) {
-      const position = positionAt(trip, now);
+      const positionTime = now - (LIVE_DELAYS ? liveDelays.get(trip.train_id) || 0 : 0);
+      const position = positionAt(trip, positionTime);
       let entry = annotations.get(trip.key);
       if (!position) {
         if (entry) {
@@ -454,7 +622,8 @@ async function buildMap(map) {
         element.addEventListener("click", () => {
           selectedStation = null;
           selectedTrip = trip.key;
-          updateTrainCallout(trip, positionAt(trip, now), now);
+          const detailTime = now - (LIVE_DELAYS ? liveDelays.get(trip.train_id) || 0 : 0);
+          updateTrainCallout(trip, positionAt(trip, detailTime), detailTime);
         });
         entry = { annotation, element, glyph };
         annotations.set(trip.key, entry);
@@ -463,7 +632,7 @@ async function buildMap(map) {
       entry.annotation.coordinate = coordinate(position.coordinate);
       entry.glyph.style.transform = `rotate(${position.heading}deg)`;
       entry.element.setAttribute("aria-label", `${trip.name}, train ${trip.train_id}, next ${position.next?.name || trip.dest}`);
-      if (selectedTrip === trip.key) updateTrainCallout(trip, position, now);
+      if (selectedTrip === trip.key) updateTrainCallout(trip, position, positionTime);
     }
     if (selectedTrip && !annotations.has(selectedTrip)) {
       $("detail-body").textContent = "This train is outside its scheduled service window.";
@@ -476,34 +645,99 @@ async function buildMap(map) {
   function render() {
     const active = activeTrains();
     $("clock").textContent = formatTime(now);
-    slider.value = now;
-    slider.setAttribute("aria-valuetext", formatTime(now));
     $("active-count").textContent = `${active} active`;
     $("counts").textContent = `${networkAnnotations.length} stations · ${networkOverlays.length} track segments · ${active} trains active`;
   }
 
-  let previousFrame;
   let previousRender = -Infinity;
-  function frame(timestamp) {
-    const elapsed = previousFrame === undefined ? 0 : (timestamp - previousFrame) / 1000;
-    previousFrame = timestamp;
-    if (playing && !document.hidden) {
-      now = Math.min(maxTime, now + elapsed * speed);
-      if (now >= maxTime) {
-        playing = false;
-        playButton.querySelector("span:last-child").textContent = "Play";
-        playButton.querySelector(".play-icon").textContent = "▶";
-        playButton.setAttribute("aria-label", "Play simulation");
+  let lastClockEpochSecond = -1;
+  let wibBaseSeconds = now;
+  function syncWibClock() {
+    const date = new Date();
+    const epochSecond = Math.floor(date.getTime() / 1000);
+    if (epochSecond !== lastClockEpochSecond) {
+      lastClockEpochSecond = epochSecond;
+      const parts = wibClockParts(date);
+      wibBaseSeconds = parts.hour * 3600 + parts.minute * 60 + parts.second + (parts.hour < 4 ? 86400 : 0);
+      const dateKey = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Jakarta", year: "numeric", month: "2-digit", day: "2-digit",
+      }).format(date);
+      if (dateKey !== activeDateKey) {
+        activeDateKey = dateKey;
+        const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "Asia/Jakarta" }).format(date);
+        isSaturday = weekday === "Sat";
+        if (isSaturday && !daySelect.querySelector('option[value=""]')) {
+          daySelect.insertBefore(new Option("Pilih jadwal…", ""), daySelect.firstChild);
+        }
+        if (!isSaturday) daySelect.querySelector('option[value=""]')?.remove();
+        selectedDay = isSaturday ? null : weekday === "Sun" ? "sunday" : "weekday";
+        daySelect.value = selectedDay || "";
+        updateSaturdayNote();
+        selectedTrip = null;
+        $("details").hidden = true;
+        rebuildTripSelection();
+        refreshLiveStatus();
       }
     }
+    now = wibBaseSeconds + date.getMilliseconds() / 1000;
+  }
+
+  async function refreshLiveStatus() {
+    try {
+      const day = selectedDay || "weekday";
+      const response = await fetch(`/api/live?day_type=${encodeURIComponent(day)}`, {
+        cache: "no-store", signal: AbortSignal.timeout(10000),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      liveData = await response.json();
+      liveDelays.clear();
+      if (LIVE_DELAYS && liveData.status === "available") {
+        const values = new Map();
+        for (const item of liveData.delays || []) {
+          if (item.field !== "time_est" || !Number.isFinite(item.delay_seconds)) continue;
+          if (!values.has(item.train_id)) values.set(item.train_id, []);
+          values.get(item.train_id).push(item.delay_seconds);
+        }
+        for (const [trainId, samples] of values) {
+          samples.sort((a, b) => a - b);
+          liveDelays.set(trainId, samples[Math.floor(samples.length / 2)]);
+        }
+      }
+      const status = $("service-status");
+      const unreachable = liveData.status === "unreachable";
+      const adjusted = liveData.status === "available" && (liveData.delays || []).length > 0;
+      status.textContent = unreachable ? "KCI tidak terjangkau" : adjusted ? "Disesuaikan estimasi KCI" : "Terjadwal";
+      status.dataset.state = unreachable ? "error" : adjusted ? "adjusted" : "scheduled";
+      if (DEBUG_MODE) {
+        $("debug-info").textContent = JSON.stringify({
+          WIB: formatTime(now, true), LIVE_DELAYS, status: liveData.status,
+          updated_at: liveData.updated_at, stations_polled: liveData.stations_polled,
+          delays: (liveData.delays || []).length, missing: (liveData.missing || []).length,
+          extra: (liveData.extra || []).length,
+        }, null, 2);
+      }
+      render();
+    } catch (_error) {
+      liveData = { status: "unreachable", delays: [], missing: [], extra: [] };
+      liveDelays.clear();
+      const status = $("service-status");
+      status.textContent = "KCI tidak terjangkau";
+      status.dataset.state = "error";
+      if (DEBUG_MODE) $("debug-info").textContent = JSON.stringify({ status: "unreachable", LIVE_DELAYS }, null, 2);
+    }
+  }
+
+  function frame(timestamp) {
+    syncWibClock();
     if (timestamp - previousRender >= 1000 / 15) {
       render();
       previousRender = timestamp;
     }
     requestAnimationFrame(frame);
   }
-  document.addEventListener("visibilitychange", () => { previousFrame = undefined; });
   render();
+  refreshLiveStatus();
+  window.setInterval(refreshLiveStatus, 30000);
   requestAnimationFrame(frame);
 }
 
@@ -545,5 +779,7 @@ async function start() {
   } catch (error) { setStatus(error.message, true); }
 }
 
-$("retry").addEventListener("click", () => window.location.reload());
-start();
+if (typeof document !== "undefined") {
+  $("retry").addEventListener("click", () => window.location.reload());
+  start();
+}

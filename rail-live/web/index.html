@@ -4,20 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101d24">
-  <title>Jakarta Railway · Schedule Map</title>
+  <title>KRL Jakarta · Schedule Map</title>
   <link rel="stylesheet" href="/static/style.css">
   <script type="module" src="/static/app.js"></script>
 </head>
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">JAKARTA RAILWAY NETWORK</p>
-      <h1>Railway Map <span>LIVE SCHEDULE</span></h1>
+      <p class="eyebrow">JAKARTA KRL NETWORK</p>
+      <h1>Railway Map <span>REAL WIB CLOCK</span></h1>
     </div>
-    <div class="network-key" aria-label="Rail systems">
+    <div class="network-key" aria-label="KRL service">
       <span><i class="dot krl"></i>KRL</span>
-      <span><i class="dot mrt"></i>MRT</span>
-      <span><i class="dot lrt"></i>LRT</span>
     </div>
   </header>
 
@@ -26,6 +24,7 @@
 
     <aside class="summary panel" aria-label="Map status">
       <div class="status-row"><span class="status-light"></span><p id="status" role="status">Connecting to Apple Maps…</p></div>
+      <div class="service-status-row"><span class="service-status-light"></span><p id="service-status" role="status">Terjadwal</p></div>
       <p id="source" class="hint">Loading schedule data…</p>
       <div class="map-filters">
         <label for="day-type">Jadwal</label>
@@ -33,10 +32,6 @@
           <option value="weekday">Hari kerja</option>
           <option value="sunday">Minggu</option>
         </select>
-        <label class="mode-toggle" for="include-kai">
-          <input id="include-kai" type="checkbox">
-          <span>KA antarkota</span>
-        </label>
       </div>
       <p id="saturday-note" class="hint saturday-note" role="status" hidden></p>
       <div id="demo-label" class="demo-label" hidden>DEMO DATA</div>
@@ -44,6 +39,11 @@
       <p id="warnings" class="hint warning"></p>
       <button id="retry" class="quiet-button" hidden type="button">Retry connection</button>
     </aside>
+
+    <section id="debug-panel" class="debug-panel panel" aria-label="Live polling debug" hidden>
+      <p>LIVE POLLING DEBUG</p>
+      <pre id="debug-info">Waiting for poll status…</pre>
+    </section>
 
     <section id="details" class="details panel" hidden aria-label="Selected station or train">
       <button id="close-details" class="close-button" type="button" aria-label="Close details">×</button>
@@ -55,32 +55,13 @@
 
     <div class="bottom-dock">
       <p class="disclaimer" lang="id"><span class="badge-mark" aria-hidden="true">≈</span>Posisi estimasi berdasarkan jadwal, bukan GPS.</p>
-      <section class="playback panel" aria-label="Train playback controls">
-        <button id="play" class="play-button" type="button" disabled><span class="play-icon" aria-hidden="true">▶</span><span>Play</span></button>
+      <section class="clock-panel panel" aria-label="Current Jakarta time">
         <div class="clock-block">
-          <output id="clock" for="time">06:00</output>
-          <small>WIB <span>·</span> SERVICE CLOCK</small>
+          <output id="clock">00:00</output>
+          <small>WAKTU NYATA · WIB</small>
         </div>
-        <div class="timeline">
-          <div class="timeline-heading"><label for="time">Schedule time</label><span id="active-count">0 trains</span></div>
-          <input id="time" type="range" min="0" max="97200" value="21600" step="1" disabled>
-          <div class="ticks"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span><span id="timeline-end">27:00</span></div>
-        </div>
-        <fieldset class="speed-control" aria-label="Playback speed">
-          <legend>Speed</legend>
-          <div class="speed-options">
-            <button type="button" data-speed="1" aria-pressed="false" disabled>1×</button>
-            <button type="button" data-speed="10" aria-pressed="false" disabled>10×</button>
-            <button type="button" data-speed="60" aria-pressed="true" disabled>60×</button>
-          </div>
-        </fieldset>
+        <span id="active-count">0 active</span>
       </section>
-      <p class="attribution" id="attribution">
-        Dataset: <a id="data-source-link" href="#" target="_blank" rel="noopener">Loading source…</a>
-        · Built <time id="data-built-at"></time><br>
-        <span id="data-source-attribution"></span>
-        <span> · Station coordinates © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> · Map tiles © Apple</span>
-      </p>
     </div>
   </main>
 </body>

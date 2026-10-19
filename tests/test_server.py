@@ -34,8 +34,11 @@ class ServerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "data").mkdir()
-            (root / "data" / "stations.json").write_text("[]")
-            with patch.object(main, "ROOT", root):
+            (root / "data" / "fallback").mkdir(parents=True)
+            (root / "data" / "fallback" / "stations.json").write_text("[]")
+            with patch.object(main, "DATA", root / "data" / "fallback"), patch.object(
+                main, "OUTPUT", root / "data" / "runtime"
+            ):
                 response = self.client.get("/data/stations.json")
                 self.assertEqual(response.status_code, 200)
                 self.assertEqual(response.json(), [])

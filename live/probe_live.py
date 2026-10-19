@@ -1,6 +1,6 @@
 """Poll KCI station schedules and compare them with the packaged timetable.
 
-Run from the project root: ``python3 -m scrapers.probe_live``.
+Run from the project root: ``python3 -m live.probe_live``.
 The existing KCI client and Cloudflare session implementation are used unchanged.
 """
 
@@ -19,9 +19,9 @@ from zoneinfo import ZoneInfo
 from . import krl_client
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "rail-live" / "output" / "probe"
-TRIPS_PATH = ROOT / "rail-live" / "output" / "trips.json"
-META_PATH = ROOT / "rail-live" / "output" / "meta.json"
+OUT = ROOT / "data" / "reports" / "probe"
+TRIPS_PATH = ROOT / "data" / "runtime" / "trips.json"
+META_PATH = ROOT / "data" / "runtime" / "meta.json"
 TZ = ZoneInfo("Asia/Jakarta")
 DEFAULT_STATIONS = ("MRI", "JNG", "THB", "DP", "BKS")
 _stop = False
@@ -359,7 +359,7 @@ def main():
             "interval_minutes": args.interval_minutes, "snapshot_cycles": cycle_no,
             "trip_count_all_day_types": trip_count, "eligible_day_types": sorted(eligible_days),
             "static_path": str(TRIPS_PATH.relative_to(ROOT)), "timezone": "Asia/Jakarta",
-            "kci_source": "scrapers.krl_client.fetch_schedules (unchanged)",
+            "kci_source": "live.krl_client.fetch_schedules",
             "meta_built_at": metadata.get("built_at"),
         })
         _write_report(report)

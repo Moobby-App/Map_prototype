@@ -10,8 +10,13 @@ import asyncio
 import json
 import os
 import time
+from pathlib import Path
 
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+
+CHROME = os.environ.get("CHROME_PATH") or "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 CACHE_FILE = ".cf_session.json"
 CACHE_MAX_AGE = 20 * 60          # detik; cf_clearance biasanya hidup lebih lama
 CHALLENGE_TIMEOUT = 45           # detik menunggu challenge selesai

@@ -5,7 +5,7 @@ import math
 import urllib.parse
 import urllib.request
 from rapidfuzz.fuzz import ratio
-from .common import DATA, ROOT, OUT_OF_SCOPE_STATION_IDS, active, name_key, read_json, write_json, station_overrides
+from .common import DATA, RAW, ROOT, OUT_OF_SCOPE_STATION_IDS, active, name_key, read_json, write_json, station_overrides
 
 BBOX = "-6.75,106.2,-5.95,107.25"
 STATION_ALIASES = {
@@ -144,9 +144,9 @@ def convert(payload, station_rows, trips, overrides=None):
 def main():
     from pathlib import Path
     if Path.cwd().resolve() != ROOT: raise RuntimeError(f"Run Python from {ROOT}")
-    station_rows = read_json(DATA / "raw/krl/stations.json")["data"]
+    station_rows = read_json(RAW / "krl/stations.json")["data"]
     trips = read_json(DATA / "trips.json")
-    cache = DATA / "raw/osm/overpass.json"
+    cache = RAW / "osm/overpass.json"
     if cache.exists(): payload = read_json(cache)
     else:
         request = urllib.request.Request("https://overpass-api.de/api/interpreter", data=urllib.parse.urlencode({"data": QUERY}).encode(), headers={"User-Agent": "JakartaRailLocal/0.2", "Accept": "application/json"})
@@ -158,7 +158,7 @@ def main():
     write_json(DATA / "stations.json", stations)
     write_json(DATA / "lines.geojson", lines)
     (DATA / "unmatched_stations.txt").write_text("\n".join(unmatched)+"\n")
-    write_json(DATA / "raw/osm/line_methods.json", methods)
+    write_json(RAW / "osm/line_methods.json", methods)
     print(f"Stations={len(stations)}, unmatched={len(unmatched)}, lines={len(lines['features'])}")
     for method in methods: print(method)
 

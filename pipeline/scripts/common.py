@@ -1,9 +1,10 @@
 import json
 import re
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]
-# Keep outputs where the existing FastAPI allowlist serves them.
-DATA = ROOT / "rail-live" / "data"
+ROOT = Path(__file__).resolve().parents[2]
+# Normalized output remains available through the legacy fallback endpoint.
+DATA = ROOT / "data" / "fallback"
+RAW = ROOT / "data" / "raw"
 OUT_OF_SCOPE_STATION_IDS = {"MER", "YK", "SK", "SLO"}
 
 def write_json(path, value):

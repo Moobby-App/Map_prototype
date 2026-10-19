@@ -1,10 +1,9 @@
-"""Local railway map server. Run from rail-live with uvicorn server.main:app."""
+"""Local railway map server. Run from the project root with run_server.py."""
 
 import asyncio
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
-import sys
 import time
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -16,15 +15,14 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data"
-OUTPUT = ROOT / "output"
-sys.path.insert(0, str(ROOT.parent))
-from scrapers import krl_client
+DATA = ROOT / "data" / "fallback"
+OUTPUT = ROOT / "data" / "runtime"
 
-# Prefer the project configuration; support launching from the workspace root.
-ENV_FILE = ROOT / ".env" if (ROOT / ".env").exists() else ROOT.parent / ".env"
+# Load project configuration after inherited environment variables.
+ENV_FILE = ROOT / ".env"
 load_dotenv(ENV_FILE)
-ORIGIN = "http://localhost:8000"
+ORIGIN = os.getenv("MAPKIT_ORIGIN", "http://localhost:8000").strip()
+from live import krl_client
 TOKEN_TTL = 1800
 WIB = ZoneInfo("Asia/Jakarta")
 LIVE_STATIONS = ("MRI", "JNG", "THB", "DP", "BKS")
@@ -280,12 +278,14 @@ def token(response: Response):
     if not all((team_id, key_id, key_path)):
         raise HTTPException(
             503, "Map credentials missing. Configure TEAM_ID, KEY_ID and "
-            "MAPKIT_PRIVATE_KEY_PATH in .env or rail-live/.env.",
+            "MAPKIT_PRIVATE_KEY_PATH in .env.",
             headers={"Cache-Control": "no-store"},
         )
     path = Path(key_path).expanduser()
     if not path.is_absolute():
-        path = ROOT / path
+        root_candidate = ROOT / path
+        legacy_candidate = ROOT / "rail-live" / path
+        path = root_candidate if root_candidate.exists() else legacy_candidate
     now = int(time.time())
     try:
         signed = jwt.encode(

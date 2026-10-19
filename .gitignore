@@ -1,9 +1,32 @@
+# Local credentials
 .env
 .env.*
 !.env.example
 *.p8
+.cf_session.json
+**/.cf_session.json
 **/.cf_cache.json
 **/.cf_cache.tmp
-.cf_session.json
-data/raw/
+
+# Python and JavaScript environments/caches
+.venv/
+**/.venv/
 __pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyc
+node_modules/
+**/node_modules/
+.DS_Store
+**/.DS_Store
+
+# Raw source captures and live/probe caches
+data/raw/
+**/raw/
+live/cache/
+data/reports/probe/
+**/probe/cache/
+**/live/cache/
+
+# Temporary files
+*.tmp

@@ -4,9 +4,9 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
-from scrapers import cf_session
-from scrapers.scrape_krl import KCIClient, active_stations, minutes, normalize, windows, run
-from scrapers.fetch_osm import convert, route_segments
+from legacy.scrapers import cf_session
+from legacy.scrapers.scrape_krl import KCIClient, active_stations, minutes, normalize, windows, run
+from legacy.scrapers.fetch_osm import convert, route_segments
 
 
 class ScraperTests(unittest.TestCase):
@@ -19,7 +19,7 @@ class ScraperTests(unittest.TestCase):
             for start, end in windows():
                 (cache / f"A_{start.replace(':', '')}_{end.replace(':', '')}.json").write_text('{"data": []}')
             args = SimpleNamespace(data_dir=data, normalize_only=False, impersonate="chrome")
-            with patch("scrapers.scrape_krl.KCIClient") as client:
+            with patch("legacy.scrapers.scrape_krl.KCIClient") as client:
                 run(args)
                 client.assert_not_called()
             output = data / "trips.json"

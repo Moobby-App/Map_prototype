@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 
-PROJECT = Path(__file__).resolve().parent / "rail-live"
+PROJECT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT))
 
 if __name__ == "__main__":

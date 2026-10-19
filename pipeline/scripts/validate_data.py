@@ -1,7 +1,7 @@
 """Validate real normalized files and print the schema handoff previews."""
 import math
 from collections import Counter
-from .common import DATA, read_json
+from .common import DATA, RAW, read_json
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     print("Undrawable trips by distinct missing-station set:")
     for missing, count in sorted(grouped.items(), key=lambda item: (-item[1], item[0])):
         print(f"{count}: {', '.join(missing) if missing else '(invalid stop times or fewer than 2 stops)'}")
-    methods_path = DATA / "raw/osm/line_methods.json"
+    methods_path = RAW / "osm/line_methods.json"
     if methods_path.exists():
         methods = read_json(methods_path)
         print("Approximate lines:", sum(bool(item.get("approximate")) for item in methods))

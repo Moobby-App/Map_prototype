@@ -12,9 +12,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parent
-INPUT_JSON = ROOT / "asset-krl-IRDI4A5B.json"
-OUTPUT_DIR = ROOT / "output"
+ROOT = Path(__file__).resolve().parents[2]
+INPUT_JSON = ROOT / "pipeline" / "source" / "open-krl.json"
+OUTPUT_DIR = ROOT / "data" / "runtime"
 DAY_TYPES = {0: "daily", 1: "weekday", 2: "sunday"}
 
 
@@ -278,7 +278,7 @@ def build(input_path: Path = INPUT_JSON, output_dir: Path = OUTPUT_DIR) -> dict[
         ("MRI", 18600), ("TEB", 18810), ("CW", 18930),
         ("DRN", 19050), ("PSMB", 19110), ("PSM", 19380),
     ]
-    old_path = ROOT / "data" / "trips.json"
+    old_path = ROOT / "data" / "fallback" / "trips.json"
     if not old_path.is_file():
         raise FileNotFoundError(f"required regression baseline missing: {old_path}")
     old_rows = json.loads(old_path.read_text(encoding="utf-8"))
@@ -362,7 +362,7 @@ def build(input_path: Path = INPUT_JSON, output_dir: Path = OUTPUT_DIR) -> dict[
             "Conversion to trips.json seconds is raw cumulative units multiplied by 30.",
         ],
         "train_1000_regression": {
-            "baseline": "rail-live/data/trips.json",
+            "baseline": "data/fallback/trips.json",
             "expected_first_six_stops": [{"station_id": station, "t": seconds} for station, seconds in expected_1000],
             "passed": True,
         },

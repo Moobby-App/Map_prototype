@@ -1,8 +1,8 @@
 """Crawl KCI from the project root after smoke_krl succeeds."""
 import argparse
 from collections import defaultdict
-from . import krl_client as client
-from .common import DATA, ROOT, OUT_OF_SCOPE_STATION_IDS, active, name_key, read_json, seconds, write_json, station_overrides
+from live import krl_client as client
+from .common import DATA, RAW, ROOT, OUT_OF_SCOPE_STATION_IDS, active, name_key, read_json, seconds, write_json, station_overrides
 
 
 def normalize(cache, station_rows):
@@ -69,13 +69,13 @@ def main():
     args = parser.parse_args()
     if __import__('pathlib').Path.cwd().resolve() != ROOT:
         raise RuntimeError(f"Run Python from {ROOT}")
-    smoke = read_json(DATA / "raw/krl/smoke_report.json")
+    smoke = read_json(RAW / "krl/smoke_report.json")
     window = smoke["window_minutes"]
-    station_path = DATA / "raw/krl/stations.json"
+    station_path = RAW / "krl/stations.json"
     if not station_path.exists(): write_json(station_path, client.fetch_stations())
     station_rows = read_json(station_path)["data"]
     stations = active(station_rows)
-    schedule_dir = DATA / "raw/krl/schedules"
+    schedule_dir = RAW / "krl/schedules"
     schedule_dir.mkdir(parents=True, exist_ok=True)
     windows = [(m, min(m+window, 1440)) for m in range(240, 1440, window)]
     total = len(stations)*len(windows)
@@ -118,7 +118,7 @@ def main():
     excluded = report.pop("excluded_trips")
     write_json(DATA / "trips.json", trips)
     write_json(DATA / "trips_excluded.json", excluded)
-    write_json(DATA / "raw/krl/normalization_report.json", report)
+    write_json(RAW / "krl/normalization_report.json", report)
     print(report, flush=True)
 
 if __name__ == "__main__":

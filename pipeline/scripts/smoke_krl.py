@@ -1,19 +1,19 @@
 """Probe MRI before allowing a full crawl."""
 import json
-from . import krl_client as client
-from .common import DATA, active, seconds, name_key, write_json
+from live import krl_client as client
+from .common import RAW, active, seconds, name_key, write_json
 
 
 def main():
     print("Chrome dapat terbuka untuk clearance Cloudflare. Profile:", client.IMPERSONATE, flush=True)
     stations = client.fetch_stations()
-    write_json(DATA / "raw/krl/stations.json", stations)
+    write_json(RAW / "krl/stations.json", stations)
     windows = [("06:00", "07:00"), ("06:00", "09:00"), ("07:00", "08:00"), ("08:00", "09:00")]
     results = {}
     for start, end in windows:
         payload = client.fetch_schedules("MRI", start, end)
         results[start, end] = payload["data"]
-        write_json(DATA / f"raw/krl/smoke/MRI_{start.replace(':','')}_{end.replace(':','')}.json", payload)
+        write_json(RAW / f"krl/smoke/MRI_{start.replace(':','')}_{end.replace(':','')}.json", payload)
         print(f"HTTP {client.last_status} MRI {start}-{end}: {len(payload['data'])} rows", flush=True)
     rows = results["06:00", "07:00"]
     if not rows:
@@ -38,7 +38,7 @@ def main():
     chosen = 180 if consistent else 60
     print(f"Window comparison: hourly union={len(union)}, 3h={len(broad)}, missing={len(union-broad)}, extra={len(broad-union)}")
     print(f"SELECTED: {chosen} minutes. Consistency only tested at MRI 06:00-09:00; not a network-wide row-limit guarantee.", flush=True)
-    write_json(DATA / "raw/krl/smoke_report.json", {"station": "MRI", "window_minutes": chosen, "consistent": consistent, "hourly_rows": len(union), "three_hour_rows": len(broad)})
+    write_json(RAW / "krl/smoke_report.json", {"station": "MRI", "window_minutes": chosen, "consistent": consistent, "hourly_rows": len(union), "three_hour_rows": len(broad)})
 
 if __name__ == "__main__":
     try:

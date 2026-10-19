@@ -3,10 +3,10 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
-from scrapers import krl_client as client
-from scrapers.common import active
-from scrapers.scrape_krl import normalize
-from scrapers.fetch_osm import convert
+from live import krl_client as client
+from pipeline.scripts.common import active
+from pipeline.scripts.scrape_krl import normalize
+from pipeline.scripts.fetch_osm import convert
 
 class PipelineTests(unittest.TestCase):
     def test_verified_empty_schedule_404_only(self):
